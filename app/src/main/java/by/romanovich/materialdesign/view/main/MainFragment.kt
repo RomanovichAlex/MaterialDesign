@@ -1,9 +1,12 @@
 package by.romanovich.materialdesign.view.main
 
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,11 +15,13 @@ import by.romanovich.materialdesign.databinding.FragmentMainBinding
 import by.romanovich.materialdesign.viewmodel.PictureOfTheDayData
 import by.romanovich.materialdesign.viewmodel.PictureOfTheDayViewModel
 import coil.load
-
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
 class MainFragment : Fragment() {
 
+
+    lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     //зануление банинга из за утечек памяти в он дестрой, чтоб в фоне не висел
     private var _binding: FragmentMainBinding? = null
     val binding: FragmentMainBinding
@@ -43,6 +48,13 @@ class MainFragment : Fragment() {
     }
 
 
+
+
+
+
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //верни дату вешаем лисенир
@@ -50,6 +62,37 @@ class MainFragment : Fragment() {
             renderData(it)
         })
         viewModel.sendRequest()
+
+        //по клику на википедию открываем википедию, по введенному тексту
+        binding.inputLayout.setEndIconOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
+            })
+        }
+        //получаем боттом... из контейнера ...
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
+        //открыть шторку на половину
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+
+
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    /*BottomSheetBehavior.STATE_DRAGGING -> TODO("not implemented")
+                    BottomSheetBehavior.STATE_COLLAPSED -> TODO("not implemented")
+                    BottomSheetBehavior.STATE_EXPANDED -> TODO("not implemented")
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> TODO("not implemented")
+                    BottomSheetBehavior.STATE_HIDDEN -> TODO("not implemented")
+                    BottomSheetBehavior.STATE_SETTLING -> TODO("not implemented")*/
+                }
+            }
+            //когда слайд движется
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                Log.d("mylogs", "slideOffset $slideOffset")
+            }
+
+        })
+
     }
 
 
