@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentMainBinding
 import by.romanovich.materialdesign.view.MainActivity
+import by.romanovich.materialdesign.view.chips.ChipsFragment
 import by.romanovich.materialdesign.viewmodel.PictureOfTheDayData
 import by.romanovich.materialdesign.viewmodel.PictureOfTheDayViewModel
 import coil.load
@@ -131,7 +132,9 @@ class MainFragment : Fragment() {
                 Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
             }
             R.id.app_bar_settings -> {
-                Toast.makeText(requireContext(), "app_bar_settings", Toast.LENGTH_SHORT).show()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container,ChipsFragment.newInstance()).commit()
+
             }
             android.R.id.home -> {
                 BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager,"fl")
