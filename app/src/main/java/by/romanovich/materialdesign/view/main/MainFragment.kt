@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +18,7 @@ import by.romanovich.materialdesign.view.MainActivity
 import by.romanovich.materialdesign.viewmodel.PictureOfTheDayData
 import by.romanovich.materialdesign.viewmodel.PictureOfTheDayViewModel
 import coil.load
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
@@ -96,7 +98,31 @@ class MainFragment : Fragment() {
 //связываем setSupportActionBar с MainActivity
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)
+
+        binding.fab.setOnClickListener{
+            if(isMain){
+                //по нажатию прячем бургер
+                binding.bottomAppBar.navigationIcon = null
+                //по центру если на главной странице
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+               //меняем кнопку на назад
+                binding.fab.setImageResource(R.drawable.ic_back_fab)
+                //скрываем иконки
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
+            }else{
+                binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar)
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                //меняем кнопку на по умолчанию
+                binding.fab.setImageResource(R.drawable.ic_plus_fab)
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
+            }
+            isMain = !isMain
+        }
     }
+
+    var isMain = true
+
+
     //обработчик нажатий
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
