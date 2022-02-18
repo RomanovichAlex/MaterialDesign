@@ -1,11 +1,15 @@
 package by.romanovich.materialdesign.view.main
 
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -150,7 +154,7 @@ class MainFragment : Fragment() {
         private fun renderData(pictureOfTheDayData: PictureOfTheDayData) {
             when (pictureOfTheDayData) {
                 is PictureOfTheDayData.Error -> {
-
+                    loadingFailed(pictureOfTheDayData.error,pictureOfTheDayData.code)
                 }
                 is PictureOfTheDayData.Loading -> {
 
@@ -164,6 +168,28 @@ class MainFragment : Fragment() {
                 }
             }
         }
+
+    private fun loadingFailed(textId: Int, code: Int) {
+        val dialog: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        val inflater: LayoutInflater? = LayoutInflater.from(requireContext())
+        val exitView: View = inflater!!.inflate(R.layout.dialog_error, null)
+        dialog.setView(exitView)
+        val dialog1: Dialog? = dialog.create()
+        val ok: Button = exitView.findViewById(R.id.ok)
+        val codeTextView = exitView.findViewById<TextView>(R.id.textError)
+
+        codeTextView.text = when(textId) {
+            R.string.serverError -> getString(R.string.serverError)
+            R.string.codeError -> getString(R.string.codeError) + " " + code
+            else -> ""
+        }
+        dialog1?.setCancelable(false)
+        ok.setOnClickListener {
+            dialog1?.dismiss()
+            requireActivity().onBackPressed()
+        }
+        dialog1?.show()
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

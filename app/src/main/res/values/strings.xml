@@ -10,6 +10,11 @@
     <string name="search">Search</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error">Error</string>
+    <string name="errorRus">Ошибка</string>
+    <string name="Exit">Выход</string>
+    <string name="serverError">Ошибка на сервере</string>
+    <string name="codeError">Код ошибки</string>
 
 
 </resources>

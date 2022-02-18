@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import by.romanovich.materialdesign.BuildConfig
+import by.romanovich.materialdesign.R
 
 import by.romanovich.materialdesign.repository.PDOServerResponse
 import by.romanovich.materialdesign.repository.PictureOfTheDayRetrofitImpl
@@ -35,13 +36,12 @@ class PictureOfTheDayViewModel(
                         }
                     // если ответ неудачный
                     }else{
-                        // TODO HW вывести ошибку
+                        liveData.postValue(PictureOfTheDayData.Error(R.string.codeError,response.code()))
                     }
 
                 }
-
                 override fun onFailure(call: Call<PDOServerResponse>, t: Throwable) {
-                    // TODO HW
+                    liveData.postValue(PictureOfTheDayData.Error(R.string.codeError,0))
                 }
             }
         )
