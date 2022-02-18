@@ -1,7 +1,7 @@
 package by.romanovich.materialdesign.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.view.main.MainFragment
 

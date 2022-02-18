@@ -1,12 +1,11 @@
 package by.romanovich.materialdesign.view.chips
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import by.romanovich.materialdesign.R
+import androidx.fragment.app.Fragment
 import by.romanovich.materialdesign.databinding.FragmentChipsBinding
 import com.google.android.material.chip.Chip
 
