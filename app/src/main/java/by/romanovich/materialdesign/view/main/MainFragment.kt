@@ -60,10 +60,6 @@ class MainFragment : Fragment() {
 
 
 
-
-
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //верни дату вешаем лисенир
@@ -160,11 +156,12 @@ class MainFragment : Fragment() {
 
                 }
                 is PictureOfTheDayData.Success -> {
-
                     //в наш байнинг загружаем урл
                     binding.imageView.load(pictureOfTheDayData.serverResponse.url){
                         placeholder(R.drawable.ic_no_photo_vector)
                     }
+                    binding.included.bottomSheetDescriptionHeader.text = pictureOfTheDayData.serverResponse.title
+                    binding.included.bottomSheetDescription.text = pictureOfTheDayData.serverResponse.explanation
                 }
             }
         }
