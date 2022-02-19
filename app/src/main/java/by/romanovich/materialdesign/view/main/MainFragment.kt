@@ -133,7 +133,7 @@ class MainFragment : Fragment() {
             }
             R.id.app_bar_settings -> {
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container,ChipsFragment.newInstance()).commit()
+                    .replace(R.id.container,ChipsFragment.newInstance()).addToBackStack("").commit()
 
             }
             android.R.id.home -> {
