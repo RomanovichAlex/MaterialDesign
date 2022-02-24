@@ -110,12 +110,16 @@ class MainFragment : Fragment() {
                 binding.fab.setImageResource(R.drawable.ic_back_fab)
                 //скрываем иконки
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
+                //открываем шторку
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             }else{
                 binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar)
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                 //меняем кнопку на по умолчанию
                 binding.fab.setImageResource(R.drawable.ic_plus_fab)
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
+                //закрываем шторку
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
             isMain = !isMain
         }

@@ -5,7 +5,7 @@
     </style>
 
     <style name="MyBlackBlue" parent="MyBaseTheme">
-        <item name="superColor">@color/red</item>
+        <item name="superColor">@color/black</item>
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyleBlackBlue</item>
         <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyleBlackBlue</item>
     </style>
