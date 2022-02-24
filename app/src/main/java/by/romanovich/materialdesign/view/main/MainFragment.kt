@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentMainBinding
 import by.romanovich.materialdesign.view.MainActivity
-import by.romanovich.materialdesign.view.chips.ChipsFragment
+import by.romanovich.materialdesign.view.settings.SettingsFragment
 import by.romanovich.materialdesign.viewmodel.PictureOfTheDayData
 import by.romanovich.materialdesign.viewmodel.PictureOfTheDayViewModel
 import coil.load
@@ -133,7 +133,7 @@ class MainFragment : Fragment() {
             }
             R.id.app_bar_settings -> {
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container,ChipsFragment.newInstance()).addToBackStack("").commit()
+                    .replace(R.id.container,SettingsFragment.newInstance()).addToBackStack("").commit()
 
             }
             android.R.id.home -> {
