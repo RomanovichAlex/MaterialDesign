@@ -4,8 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 //дто файл который будет возращать ретрофит по запросу к наса
 data class PDOServerResponse (
-
-        val date: String,
+        @SerializedName("date") val date: String?,
         val explanation: String,
         val hdurl: String,
 

@@ -25,6 +25,8 @@ import by.romanovich.materialdesign.viewmodel.PictureOfTheDayViewModel
 import coil.load
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainFragment : Fragment() {
@@ -58,8 +60,6 @@ class MainFragment : Fragment() {
 
 
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //верни дату вешаем лисенир
@@ -67,6 +67,21 @@ class MainFragment : Fragment() {
             renderData(it)
         })
         viewModel.sendRequest()
+
+
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.two_days_ago -> {
+                    viewModel.sendRequest(takeDate(-2))
+                }
+                R.id.yestrday -> {
+                    viewModel.sendRequest(takeDate(-1))
+                }
+                R.id.today -> {
+                    viewModel.sendRequest()
+                }
+            }
+        }
 
         //по клику на википедию открываем википедию, по введенному тексту
         binding.inputLayout.setEndIconOnClickListener{
@@ -123,6 +138,14 @@ class MainFragment : Fragment() {
             }
             isMain = !isMain
         }
+    }
+
+    private fun takeDate(count: Int): String {
+        val currentDate = Calendar.getInstance()
+        currentDate.add(Calendar.DAY_OF_MONTH, count)
+        val format1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        format1.timeZone = TimeZone.getTimeZone("EST")
+        return format1.format(currentDate.time)
     }
 
     var isMain = true

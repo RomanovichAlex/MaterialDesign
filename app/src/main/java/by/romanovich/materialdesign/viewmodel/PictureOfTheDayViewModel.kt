@@ -20,30 +20,43 @@ class PictureOfTheDayViewModel(
         return liveData
     }
     fun sendRequest(){
-        liveData.postValue(PictureOfTheDayData.Loading(null))
-        pictureOfTheDayRetrofitImpl.getRetrofitImpl().getPictureOfTheDay(BuildConfig.NASA_API_KEY).enqueue(
-            object : Callback<PDOServerResponse> {
-                //делаем колбэк получаем респонсе
-                override fun onResponse(
-                    call: Call<PDOServerResponse>,
-                    response: Response<PDOServerResponse>
-                ) {
-                    //обрабатываем ответ
-                    if(response.isSuccessful&&response.body()!=null){
-                        //передаем в лайвдату сукцесс
-                        response.body()?.let {
-                            liveData.postValue(PictureOfTheDayData.Success(it))
-                        }
-                    // если ответ неудачный
-                    }else{
-                        liveData.postValue(PictureOfTheDayData.Error(R.string.codeError,response.code()))
-                    }
-
-                }
-                override fun onFailure(call: Call<PDOServerResponse>, t: Throwable) {
-                    liveData.postValue(PictureOfTheDayData.Error(R.string.codeError,0))
-                }
+        liveData.value = PictureOfTheDayData.Loading(0)
+        val apiKey: String = BuildConfig.NASA_API_KEY
+            if (apiKey.isBlank()) {
+                liveData.value = PictureOfTheDayData.Error(R.string.codeError,0)
+            } else {
+                pictureOfTheDayRetrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey).enqueue(callback)
             }
-        )
+    }
+
+    fun sendRequest(date:String) {
+        liveData.value = PictureOfTheDayData.Loading(0)
+        val apiKey: String = BuildConfig.NASA_API_KEY
+        if (apiKey.isBlank()) {
+            liveData.value = PictureOfTheDayData.Error(R.string.codeError,0)
+        } else {
+            pictureOfTheDayRetrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey,date).enqueue(callback)
+        }
+    }
+
+
+    private val callback = object : Callback<PDOServerResponse> {
+        override fun onResponse(
+            call: Call<PDOServerResponse>,
+            response: Response<PDOServerResponse>
+        ) {
+            if(response.isSuccessful&&response.body()!=null){
+                liveData.value = PictureOfTheDayData.Success(response.body()!!)
+            }else{
+                liveData.value = PictureOfTheDayData.Error(R.string.codeError,response.code())
+            }
+        }
+
+
+    override fun onFailure(call: Call<PDOServerResponse>, t: Throwable) {
+        liveData.value = PictureOfTheDayData.Error(R.string.codeError,0)
+    //https://material.io/components/bottom-navigation/android#theming-a-bottom-navigation-bar
+    }
+
     }
 }

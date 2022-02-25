@@ -15,6 +15,9 @@
     <string name="Exit">Выход</string>
     <string name="serverError">Ошибка на сервере</string>
     <string name="codeError">Код ошибки</string>
+    <string name="twoDaysAgo">Позавчера</string>
+    <string name="yesterday">Вчера</string>
+    <string name="today">Сегодня</string>
 
 
 </resources>
