@@ -18,6 +18,9 @@
     <string name="twoDaysAgo">Позавчера</string>
     <string name="yesterday">Вчера</string>
     <string name="today">Сегодня</string>
+    <string name="theme_Dark">ThemeDark</string>
+    <string name="theme_Mens">ThemeMens</string>
+    <string name="theme_Girls">ThemeGirls</string>
 
 
 </resources>

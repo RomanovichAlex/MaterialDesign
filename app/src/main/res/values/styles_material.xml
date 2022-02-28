@@ -3,7 +3,19 @@
 
     <style name="myBottomAppBarStyleBlackBlue" parent="Widget.MaterialComponents.BottomAppBar">
         <item name="backgroundTint">#222222</item>
+    </style>
 
+    <style name="myBottomAppBarStyleGirls" parent="Widget.MaterialComponents.BottomAppBar">
+        <item name="backgroundTint">@color/hotPink</item>
+    </style>
+
+    <style name="myBottomAppBarStyleMens" parent="Widget.MaterialComponents.BottomAppBar">
+        <item name="backgroundTint">#2b62ff</item>
+
+    </style>
+
+    <style name="myFloatingActionButtonStyleBlack" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">#222222</item>
     </style>
 
     <style name="myFloatingActionButtonStyleBlackBlue" parent="Widget.MaterialComponents.FloatingActionButton">
@@ -13,7 +25,7 @@
 
     <!--    https://material.io/components/bottom-navigation/android#bottom-navigation-bar-->
     <style name="myBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="backgroundTint">@color/orange</item>
+        <item name="backgroundTint">?superColor</item>
     </style>
 
 
@@ -30,21 +42,33 @@
 
 
     <style name="myMaterialButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/orange</item>
+        <item name="backgroundTint">?superColor</item>
         <item name="textAllCaps">false</item>
     </style>
     <!--    TODO colorSurface-->
     <style name="myTabStyle" parent="Widget.MaterialComponents.TabLayout">
-        <item name="tabRippleColor">@color/orange</item>
+        <item name="tabRippleColor">?superColor</item>
     </style>
 
 
     <style name="MyTextAppearanceHeadline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="fontFamily">@font/azeret</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textStyle">italic</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">24sp</item>
         <item name="android:letterSpacing">0</item>
+
+    </style>
+
+
+    <style name="MyTextAppearanceHeadline2" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">28sp</item>
+        <!-- Customize your theme here. -->
+        <item name="android:fontFamily">cursive</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:letterSpacing">10</item>
     </style>
 
 
@@ -76,5 +100,16 @@
     <!--    TODO ShapeAppearance только для чипов-->
     <style name="myBottomAppBarStyle" parent="Widget.MaterialComponents.BottomAppBar">
         <item name="backgroundTint">?superColor</item>
+        <item name="navigationIconTint">@color/white</item>
+    </style>
+
+    <style name="myFABStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">?superColor</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="myTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="helperTextTextColor">?textInputColor</item>
+        <item name="boxBackgroundColor">?textInputColor</item>
     </style>
 </resources>

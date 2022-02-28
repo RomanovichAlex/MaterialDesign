@@ -25,4 +25,10 @@
     <color name="green">#66EF12</color>
     <color name="blue">#10B0F4</color>
 
+
+    <color name="hotPink">#FF1493</color>
+    <color name="myPrimaty2">#00acc1</color>
+    <color name="mySecondary1">#00acc1</color>
+    <color name="mySecondary2">#f44336</color>
+
 </resources>
