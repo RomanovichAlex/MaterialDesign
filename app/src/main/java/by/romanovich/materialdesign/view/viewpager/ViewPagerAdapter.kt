@@ -29,14 +29,14 @@ class ViewPagerAdapter(private val fragmentManager: FragmentManager) :
     //свайпы по таб
     override fun getPageTitle(position: Int): CharSequence? {
         //будут только картинки
-        //return null
+        return null
         //будут картинки и описание
-        return when (position) {
+        /*return when (position) {
             EARTH -> "Earth"
             MARS -> "Mars"
             SYSTEM -> "System"
             else ->"null"
-        }
+        }*/
     }
 
 }
