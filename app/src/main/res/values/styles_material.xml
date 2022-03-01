@@ -43,7 +43,7 @@
 
     <style name="myMaterialButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">?superColor</item>
-        <item name="textAllCaps">false</item>
+        <item name="colorPrimary">@color/black</item>
     </style>
     <!--    TODO colorSurface-->
     <style name="myTabStyle" parent="Widget.MaterialComponents.TabLayout">

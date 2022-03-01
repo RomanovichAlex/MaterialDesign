@@ -39,13 +39,13 @@
     <style name="MyBaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="android:navigationBarColor">?superColor</item>
-        <item name="colorPrimary">?superColor</item>
+        <item name="colorPrimary">@color/black</item>
         <item name="colorOnPrimary">?superColor</item>
         <item name="colorPrimaryVariant">?superColor</item>
         <item name="colorPrimaryContainer">?superColor</item>
         <item name="colorOnPrimaryContainer">?superColor</item>
         <item name="colorPrimaryInverse">?superColor</item>
-        <item name="colorSecondary">?superColor</item>
+        <item name="colorSecondary">@color/white</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorSecondaryContainer">?superColor</item>
         <item name="colorOnSecondaryContainer">?superColor</item>

@@ -31,4 +31,8 @@
     <color name="mySecondary1">#00acc1</color>
     <color name="mySecondary2">#f44336</color>
 
+
+    <color name="colorAccent40Alfa">#66AE0B0B</color>
+    <color name="colorAccent">#AE0B0B</color>
+
 </resources>

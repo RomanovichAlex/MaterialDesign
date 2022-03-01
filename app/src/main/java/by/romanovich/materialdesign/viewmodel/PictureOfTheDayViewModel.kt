@@ -19,6 +19,7 @@ class PictureOfTheDayViewModel(
     fun getData():LiveData<PictureOfTheDayData>{
         return liveData
     }
+
     fun sendRequest(){
         liveData.value = PictureOfTheDayData.Loading(0)
         val apiKey: String = BuildConfig.NASA_API_KEY
