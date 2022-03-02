@@ -1,5 +1,6 @@
 package by.romanovich.materialdesign.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.BottomNavigationLayoutBinding
+import by.romanovich.materialdesign.view.bottomnavigation.ApiBottomActivity
+import by.romanovich.materialdesign.view.viewpager.ApiActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomNavigationDrawerFragment: BottomSheetDialogFragment() {
@@ -28,10 +31,12 @@ class BottomNavigationDrawerFragment: BottomSheetDialogFragment() {
         binding.navigationView.setNavigationItemSelectedListener { menu->
             when(menu.itemId){
                 R.id.navigation_one -> {
-                    Toast.makeText(requireContext(), "navigation_one", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(requireContext(), ApiActivity::class.java))
+                    //Toast.makeText(requireContext(), "navigation_one", Toast.LENGTH_SHORT).show()
                 }
                 R.id.navigation_two -> {
-                    Toast.makeText(requireContext(), "navigation_two", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(requireContext(), ApiBottomActivity::class.java))
+                    //Toast.makeText(requireContext(), "navigation_two", Toast.LENGTH_SHORT).show()
                 }
             }
             true

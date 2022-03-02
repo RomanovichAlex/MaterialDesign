@@ -26,6 +26,9 @@
     <!--    https://material.io/components/bottom-navigation/android#bottom-navigation-bar-->
     <style name="myBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="backgroundTint">?superColor</item>
+        <item name="textFillColor">@color/white</item>
+        <item name="textInputColor">@color/white</item>
+        <item name="textAllCaps">@color/white</item>
     </style>
 
 
@@ -43,7 +46,7 @@
 
     <style name="myMaterialButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">?superColor</item>
-        <item name="colorPrimary">@color/black</item>
+        <item name="textAllCaps">false</item>
     </style>
     <!--    TODO colorSurface-->
     <style name="myTabStyle" parent="Widget.MaterialComponents.TabLayout">

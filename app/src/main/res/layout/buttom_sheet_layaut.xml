@@ -5,6 +5,7 @@
     android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="?actionBarSize"
     android:background="#f6f6fa"
     app:behavior_hideable="false"
     app:behavior_peekHeight="?actionBarSize"
