@@ -25,6 +25,7 @@ import by.romanovich.materialdesign.viewmodel.PictureOfTheDayViewModel
 import coil.load
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.tabs.TabLayout
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -53,6 +54,7 @@ class MainFragment : Fragment() {
        return binding.root
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -62,26 +64,15 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         //верни дату вешаем лисенир
         viewModel.getData().observe(viewLifecycleOwner, Observer {
             renderData(it)
         })
         viewModel.sendRequest()
+        tabLayoutInit()
 
 
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.two_days_ago -> {
-                    viewModel.sendRequest(takeDate(-2))
-                }
-                R.id.yestrday -> {
-                    viewModel.sendRequest(takeDate(-1))
-                }
-                R.id.today -> {
-                    viewModel.sendRequest()
-                }
-            }
-        }
 
         //по клику на википедию открываем википедию, по введенному тексту
         binding.inputLayout.setEndIconOnClickListener{
@@ -139,6 +130,28 @@ class MainFragment : Fragment() {
             isMain = !isMain
         }
     }
+
+    private fun tabLayoutInit() {
+        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab!!.position) {
+                    0 -> {
+                        viewModel.sendRequest(takeDate(0))
+                    }
+                    1 -> {
+                        viewModel.sendRequest(takeDate(-1))
+                    }
+                    2 -> {
+                        viewModel.sendRequest(takeDate(-2))
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
+    }
+
 
     private fun takeDate(count: Int): String {
         val currentDate = Calendar.getInstance()
