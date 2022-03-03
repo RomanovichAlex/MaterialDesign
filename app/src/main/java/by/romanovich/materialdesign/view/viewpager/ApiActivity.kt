@@ -5,6 +5,8 @@ import android.os.Bundle
 
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.ActivityApiBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class ApiActivity : AppCompatActivity() {
@@ -16,9 +18,17 @@ class ApiActivity : AppCompatActivity() {
         binding = ActivityApiBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //в байнинге сидит вью пейджер и адаптеру присваиваем наш адаптер и на вход передаем сupportFragmentManager
-        binding.viewPager.adapter = ViewPagerAdapter(supportFragmentManager) // TODO передать child
+        binding.viewPager.adapter = ViewPager2Adapter(this)  //было с 1 адаптером (supportFragmentManager) стало зис // TODO передать child
         //таб лайаут впитал заголовки
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
+       // было binding.tabLayout.setupWithViewPager(binding.viewPager)
+        //стало TabLayoutMediator связывает вью пейджер с адаптером и нужен коллбэк
+        val tabTitles = arrayOf("Earth", "Mars", "System")
+        TabLayoutMediator(binding.tabLayout,binding.viewPager, object : TabLayoutMediator.TabConfigurationStrategy{
+            override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
+                tab.text = tabTitles[position]
+            }
+        }).attach()
+
 
         //добавили иконки табллайауту
         //binding.tabLayout.getTabAt(EARTH)?.setIcon(R.drawable.ic_earth)
