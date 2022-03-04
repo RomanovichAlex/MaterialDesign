@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.BottomNavigationLayoutBinding
 import by.romanovich.materialdesign.view.bottomnavigation.ApiBottomActivity
 import by.romanovich.materialdesign.view.viewpager.ApiActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomNavigationDrawerFragment: BottomSheetDialogFragment() {
+class
+BottomNavigationDrawerFragment: BottomSheetDialogFragment() {
 
     private var _binding: BottomNavigationLayoutBinding? = null
     val binding: BottomNavigationLayoutBinding

@@ -21,6 +21,9 @@
     <string name="theme_Dark">ThemeDark</string>
     <string name="theme_Mens">ThemeMens</string>
     <string name="theme_Girls">ThemeGirls</string>
+    <string name="home_page">Home</string>
+    <string name="asteroid_page">Asteroid</string>
+    <string name="weather_in">Weather</string>
 
 
 </resources>

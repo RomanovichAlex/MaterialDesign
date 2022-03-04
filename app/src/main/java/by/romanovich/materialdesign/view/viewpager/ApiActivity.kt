@@ -1,8 +1,7 @@
 package by.romanovich.materialdesign.view.viewpager
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
+import androidx.appcompat.app.AppCompatActivity
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.ActivityApiBinding
 import com.google.android.material.tabs.TabLayout

@@ -18,4 +18,5 @@ class PictureOfTheDayRetrofitImpl {
             .build()
         return podRetrofitImpl.create(PictureOfTheDayAPI::class.java)
     }
+
 }
