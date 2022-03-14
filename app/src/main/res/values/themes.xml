@@ -8,14 +8,16 @@
 
     <style name="MyDarkTheme" parent="MyBaseTheme">
         <!-- Primary brand color. -->
-        <item name="superColor">@color/black</item>
-        <item name="iconColor">@color/black</item>
-        <item name="textInputColor">@color/white</item>
 
-        <item name="bottomAppBarStyle">@style/myBottomAppBarStyleBlackBlue</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="superColor">@color/black</item>
+        <item name="iconColor">@color/white</item>
+        <item name="textInputColor">@color/white</item>
+        <item name="bottomNavigationStyle">@style/myBottomNavigationStyleDark</item>
+        <item name="bottomAppBarStyle">@style/myBottomAppBarStyleDark</item>
         <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyleBlack</item>
         <item name="textAppearanceHeadline1">@style/MyTextAppearanceHeadline2</item>
-
     </style>
 
     <style name="MensTheme" parent="MyBaseTheme">
@@ -40,7 +42,7 @@
         <!-- Primary brand color. -->
         <item name="android:navigationBarColor">?superColor</item>
         <item name="colorPrimary">@color/black</item>
-        <item name="colorOnPrimary">?superColor</item>
+        <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimaryVariant">?superColor</item>
         <item name="colorPrimaryContainer">?superColor</item>
         <item name="colorOnPrimaryContainer">?superColor</item>
@@ -56,7 +58,6 @@
         <item name="floatingActionButtonStyle">@style/myFABStyle</item>
         <item name="textInputStyle">@style/myTextInputLayoutStyle</item>
         <item name="chipStyle">@style/myChipStyle</item>
-        <item name="bottomAppBarStyle">@style/myBottomAppBarStyle</item>
         <item name="tabStyle">@style/myTabStyle</item>
         <item name="materialButtonStyle">@style/myMaterialButtonStyle</item>
         <item name="materialCardViewStyle">@style/myMaterialCardViewStyle</item>

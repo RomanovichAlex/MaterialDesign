@@ -5,6 +5,14 @@
         <item name="backgroundTint">#222222</item>
     </style>
 
+
+
+    <style name="myBottomAppBarStyleDark" parent="Widget.MaterialComponents.BottomAppBar">
+        <item name="backgroundTint">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="navigationIconTint">@color/white</item>
+    </style>
+
     <style name="myBottomAppBarStyleGirls" parent="Widget.MaterialComponents.BottomAppBar">
         <item name="backgroundTint">@color/hotPink</item>
     </style>
@@ -15,7 +23,7 @@
     </style>
 
     <style name="myFloatingActionButtonStyleBlack" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="backgroundTint">#222222</item>
+        <item name="backgroundTint">@color/white</item>
     </style>
 
     <style name="myFloatingActionButtonStyleBlackBlue" parent="Widget.MaterialComponents.FloatingActionButton">
@@ -26,6 +34,19 @@
     <!--    https://material.io/components/bottom-navigation/android#bottom-navigation-bar-->
     <style name="myBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="backgroundTint">?superColor</item>
+
+        <item name="textFillColor">@color/white</item>
+        <item name="textInputColor">@color/white</item>
+        <item name="textAllCaps">@color/white</item>
+    </style>
+
+    <!--    https://material.io/components/bottom-navigation/android#bottom-navigation-bar-->
+    <style name="myBottomNavigationStyleDark" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="backgroundTint">?superColor</item>
+
+
+        <item name="itemIconTint">@color/white</item>
+        <item name="itemTextColor">@color/white</item>
         <item name="textFillColor">@color/white</item>
         <item name="textInputColor">@color/white</item>
         <item name="textAllCaps">@color/white</item>
@@ -44,8 +65,10 @@
     </style>
 
 
+
     <style name="myMaterialButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">?superColor</item>
+
         <item name="textAllCaps">false</item>
     </style>
     <!--    TODO colorSurface-->
@@ -85,6 +108,7 @@
     <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">cut</item>
         <item name="cornerSize">4dp</item>
+
         <item name="chipBackgroundColor">@color/light_gray</item>
         <item name="rippleColor">@color/light_gray</item>
         <item name="chipStrokeColor">@color/light_gray</item>
@@ -103,8 +127,10 @@
     <!--    TODO ShapeAppearance только для чипов-->
     <style name="myBottomAppBarStyle" parent="Widget.MaterialComponents.BottomAppBar">
         <item name="backgroundTint">?superColor</item>
+        <item name="colorOnPrimary">@color/white</item>
         <item name="navigationIconTint">@color/white</item>
     </style>
+
 
     <style name="myFABStyle" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="backgroundTint">?superColor</item>

@@ -1,10 +1,6 @@
 
 package by.romanovich.materialdesign.repository.weather
 
-import android.os.Parcel
-import com.google.gson.annotations.SerializedName
-import retrofit2.http.GET
-import retrofit2.http.Query
 
 data class WeatherServerResponse(
     val flrID: String,
