@@ -3,7 +3,7 @@ package by.romanovich.materialdesign.repository
 import com.google.gson.annotations.SerializedName
 
 //дто файл который будет возращать ретрофит по запросу к наса
-data class PDOServerResponse (
+data class PODServerResponse (
         @SerializedName("date") val date: String?,
         val explanation: String,
         val hdurl: String,

@@ -12,24 +12,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AsteroidViewModel(private val liveData: MutableLiveData<AsteroidData> = MutableLiveData(),
+class AsteroidViewModel(private val liveData: MutableLiveData<AppState> = MutableLiveData(),
 private val asteroidRetrofitImpl: AsteroidRetrofitImpl = AsteroidRetrofitImpl()
 ) :ViewModel() {
-    fun getData(): LiveData<AsteroidData> {
+    fun getData(): LiveData<AppState> {
         return liveData
     }
 
     fun sendRequest(){
-        liveData.value = AsteroidData.Loading(0)
+        liveData.value = AppState.Loading(0)
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
-            liveData.value = AsteroidData.Error(R.string.codeError,0)
+            liveData.value = AppState.Error(R.string.codeError,0)
         } else {
             asteroidRetrofitImpl.getRetrofitImpl().getAsteroid(apiKey).enqueue(callback)
         }
     }
-
-
 
 
     private val callback = object : Callback<AsteroidServerResponse> {
@@ -38,15 +36,15 @@ private val asteroidRetrofitImpl: AsteroidRetrofitImpl = AsteroidRetrofitImpl()
             response: Response<AsteroidServerResponse>
         ) {
             if(response.isSuccessful&&response.body()!=null){
-                liveData.value = AsteroidData.Success(response.body()!!)
+                liveData.value = AppState.SuccessAsteroid(response.body()!!)
             }else{
-                liveData.value = AsteroidData.Error(R.string.codeError,response.code())
+                liveData.value = AppState.Error(R.string.codeError,response.code())
             }
         }
 
 
         override fun onFailure(call: Call<AsteroidServerResponse>, t: Throwable) {
-            liveData.value = AsteroidData.Error(R.string.codeError,0)
+            liveData.value = AppState.Error(R.string.codeError,0)
             //https://material.io/components/bottom-navigation/android#theming-a-bottom-navigation-bar
         }
 

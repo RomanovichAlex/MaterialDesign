@@ -17,7 +17,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentHomeBinding
-import by.romanovich.materialdesign.viewmodel.PictureOfTheDayData
+import by.romanovich.materialdesign.viewmodel.AppState
 import by.romanovich.materialdesign.viewmodel.PictureOfTheDayViewModel
 import coil.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -182,21 +182,21 @@ class HomeFragment : Fragment() {
 
 
         //обработка лисенера
-        private fun renderData(pictureOfTheDayData: PictureOfTheDayData) {
-            when (pictureOfTheDayData) {
-                is PictureOfTheDayData.Error -> {
-                    loadingFailed(pictureOfTheDayData.error,pictureOfTheDayData.code)
+        private fun renderData(appState: AppState) {
+            when (appState) {
+                is AppState.Error -> {
+                    loadingFailed(appState.error,appState.code)
                 }
-                is PictureOfTheDayData.Loading -> {
+                is AppState.Loading -> {
 
                 }
-                is PictureOfTheDayData.Success -> {
+                is AppState.SuccessPOD -> {
                     //в наш байнинг загружаем урл
-                    binding.imageView.load(pictureOfTheDayData.serverResponse.url){
+                    binding.imageView.load(appState.serverResponse.url){
                         placeholder(R.drawable.ic_no_photo_vector)
                     }
-                    binding.included.bottomSheetDescriptionHeader.text = pictureOfTheDayData.serverResponse.title
-                    binding.included.bottomSheetDescription.text = pictureOfTheDayData.serverResponse.explanation
+                    binding.included.bottomSheetDescriptionHeader.text = appState.serverResponse.title
+                    binding.included.bottomSheetDescription.text = appState.serverResponse.explanation
                 }
             }
         }

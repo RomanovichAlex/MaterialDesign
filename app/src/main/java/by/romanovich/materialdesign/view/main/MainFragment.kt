@@ -1,6 +1,4 @@
 package by.romanovich.materialdesign.view.main
-
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentMainBinding
-
 import by.romanovich.materialdesign.view.viewpager.MainViewPagerAdapter
 
 
@@ -46,10 +43,10 @@ class MainFragment : Fragment() {
                         0 -> binding.myBottomNavigationView.menu.findItem(R.id.navigation_home).isChecked = true
                         1 -> binding.myBottomNavigationView.menu.findItem(R.id.navigation_asteroid).isChecked = true
                         2 -> binding.myBottomNavigationView.menu.findItem(R.id.navigation_photo_earth).isChecked = true
-                        3 -> binding.myBottomNavigationView.menu.findItem(R.id.navigation_settings).isChecked = true
+                        3 -> binding.myBottomNavigationView.menu.findItem(R.id.navigation_weather).isChecked = true
+                        4 -> binding.myBottomNavigationView.menu.findItem(R.id.navigation_settings).isChecked = true
                     }
                 }
-
                 override fun onPageScrollStateChanged(state: Int) {}
             })
             binding.myBottomNavigationView.setOnItemSelectedListener {
@@ -66,13 +63,18 @@ class MainFragment : Fragment() {
                         binding.viewPager.currentItem = 2
                         true
                     }
+                    R.id.navigation_weather -> {
+                        binding.viewPager.currentItem = 3
+                        true
+                    }
 
                     R.id.navigation_settings -> {
-                        binding.viewPager.currentItem = 3
+                        binding.viewPager.currentItem = 4
                         true
                     }
                     else -> true
                 }
+
             }
         }
 

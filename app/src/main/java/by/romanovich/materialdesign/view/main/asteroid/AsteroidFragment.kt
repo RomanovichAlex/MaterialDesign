@@ -8,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentAsteroidBinding
 import by.romanovich.materialdesign.repository.asteroid.NearEarthObject
-import by.romanovich.materialdesign.viewmodel.AsteroidData
+import by.romanovich.materialdesign.viewmodel.AppState
+
 import by.romanovich.materialdesign.viewmodel.AsteroidViewModel
 
 
@@ -23,6 +24,7 @@ class AsteroidFragment : Fragment() {
     private val binding: FragmentAsteroidBinding get() = _binding!!
     private val viewModel: AsteroidViewModel by lazy { ViewModelProvider(this).get(AsteroidViewModel::class.java) }
     private val adapter:AsteroidRecyclerViewAdapter by lazy { AsteroidRecyclerViewAdapter() }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentAsteroidBinding.inflate(inflater, container, false)
@@ -38,15 +40,15 @@ class AsteroidFragment : Fragment() {
 
 
 
-    private fun renderData(it: AsteroidData?) {
+    private fun renderData(it: AppState?) {
         when(it){
-            is AsteroidData.Error -> {
+            is AppState.Error -> {
                 loadingFailed(it.error, it.code)
             }
-            is AsteroidData.Loading -> {
+            is AppState.Loading -> {
                 binding.loadingLayout.visibility = View.VISIBLE
             }
-            is AsteroidData.Success -> {
+            is AppState.SuccessAsteroid -> {
                 binding.loadingLayout.visibility = View.GONE
                 val asteroidData = mutableListOf<NearEarthObject>()
                 it.asteroidData.nearEarthObjects.values.toList().forEach {

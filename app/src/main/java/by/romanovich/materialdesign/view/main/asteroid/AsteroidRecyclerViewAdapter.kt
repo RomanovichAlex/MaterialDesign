@@ -44,5 +44,3 @@ class AsteroidRecyclerViewAdapter: RecyclerView.Adapter<AsteroidRecyclerViewAdap
         }
     }
 }
-
-

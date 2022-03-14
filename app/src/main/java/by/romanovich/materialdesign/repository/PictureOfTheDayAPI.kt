@@ -11,12 +11,12 @@ interface PictureOfTheDayAPI {
 
     @GET(END_POINT_PICTURE_OF_DAY)
     fun getPictureOfTheDay(
-        @Query("api_key") apiKey:String):Call<PDOServerResponse>
+        @Query("api_key") apiKey:String):Call<PODServerResponse>
 
     //функция будет (реализовывать ретрофит)передовать запрос поля с названием апи кей, и возрощать PDOServerResponse
     @GET(END_POINT_PICTURE_OF_DAY)
     fun getPictureOfTheDay(
         @Query("api_key") apiKey: String,
         @Query("date") date: String
-        ): Call<PDOServerResponse>
+        ): Call<PODServerResponse>
 }

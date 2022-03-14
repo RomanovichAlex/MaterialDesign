@@ -20,9 +20,16 @@
 
         <item
             android:id="@+id/navigation_photo_earth"
-            android:title="@string/weather_in"
+            android:title="@string/photo_planet"
             android:iconTint="@color/white"
             android:icon="@drawable/ic_earth_icon"
+            app:showAsAction="always"/>
+
+        <item
+            android:id="@+id/navigation_weather"
+            android:title="@string/weather_in"
+            android:iconTint="@color/white"
+            android:icon="@drawable/weather_moonrise_icon"
             app:showAsAction="always"/>
 
 

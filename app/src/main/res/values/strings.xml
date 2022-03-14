@@ -24,6 +24,14 @@
     <string name="home_page">Home</string>
     <string name="asteroid_page">Asteroid</string>
     <string name="weather_in">Weather</string>
+    <string name="photo_planet">Photo</string>
+    <string name="chips_today">Today</string>
+    <string name="chip_yesterday">Yesterday</string>
+    <string name="chip_before_yesterday">Before Yesterday</string>
+    <string name="chip_earth_today">Earth Today</string>
+    <string name="chip_weather_today">Weather Today</string>
+    <string name="chip_mars_today">Mars Today</string>
+    <string name="chip_moon_hd">Moon HD</string>
 
 
 </resources>
