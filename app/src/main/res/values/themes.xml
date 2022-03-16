@@ -8,8 +8,9 @@
 
     <style name="MyDarkTheme" parent="MyBaseTheme">
         <!-- Primary brand color. -->
+
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/blue</item>
         <item name="superColor">@color/black</item>
         <item name="iconColor">@color/white</item>
         <item name="textInputColor">@color/white</item>
@@ -17,6 +18,7 @@
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyleDark</item>
         <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyleBlack</item>
         <item name="textAppearanceHeadline1">@style/MyTextAppearanceHeadline2</item>
+        <item name="toolbarStyle">@style/myToolbar</item>
     </style>
 
     <style name="MensTheme" parent="MyBaseTheme">
@@ -25,6 +27,7 @@
         <item name="textInputColor">@color/black</item>
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyleMens</item>
         <item name="textAppearanceHeadline1">@style/MyTextAppearanceHeadline1</item>
+        <item name="toolbarStyle">@style/myToolbar</item>
     </style>
 
     <style name="GirlsTheme" parent="MyBaseTheme">4
@@ -35,13 +38,12 @@
         <item name="textInputColor">@color/black</item>
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyleGirls</item>
         <item name="textAppearanceHeadline1">@style/MyTextAppearanceHeadline1</item>
+        <item name="toolbarStyle">@style/myToolbar</item>
     </style>
 
     <style name="MyBaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="android:navigationBarColor">?superColor</item>
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimaryVariant">?superColor</item>
         <item name="colorPrimaryContainer">?superColor</item>
         <item name="colorOnPrimaryContainer">?superColor</item>

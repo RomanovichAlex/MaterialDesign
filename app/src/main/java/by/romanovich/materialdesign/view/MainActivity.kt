@@ -7,6 +7,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Group
 import by.romanovich.materialdesign.R
+import by.romanovich.materialdesign.view.coordinator.CoordinatorFragment
 import by.romanovich.materialdesign.view.main.MainFragment
 
 
@@ -28,11 +29,13 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        //setContentView(R.layout.activity_main)
-        setContentView(R.layout.activity_test_layaut)
+        setContentView(R.layout.activity_main)
+
 
         if (savedInstanceState == null){
             //supportFragmentManager.beginTransaction().replace(R.id.container, MainFragment.newInstance()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.container, CoordinatorFragment.newInstance()).commit()
+
         }
 
         /*findViewById<Button>(R.id.button1).visibility = View.GONE
