@@ -22,6 +22,7 @@
     </style>
 
     <style name="MensTheme" parent="MyBaseTheme">
+        <item name="colorPrimary">@color/green</item>
         <item name="superColor">@color/purple_500</item>
         <item name="iconColor">@color/purple_500</item>
         <item name="textInputColor">@color/black</item>

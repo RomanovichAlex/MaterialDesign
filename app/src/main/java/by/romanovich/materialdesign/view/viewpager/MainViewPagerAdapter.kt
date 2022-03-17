@@ -2,6 +2,7 @@ package by.romanovich.materialdesign.view.viewpager
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import by.romanovich.materialdesign.view.coordinator.CoordinatorFragment
 import by.romanovich.materialdesign.view.home.HomeFragment
 import by.romanovich.materialdesign.view.main.asteroid.AsteroidFragment
 import by.romanovich.materialdesign.view.main.photoEarthFragment.PhotoEarthFragment
@@ -12,7 +13,7 @@ import by.romanovich.materialdesign.view.settings.SettingsFragment
 class MainViewPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
 
     //массив фррагментов
-    private val fragments = arrayOf(HomeFragment.newInstance(), AsteroidFragment.newInstance(),PhotoEarthFragment.newInstance(), SettingsFragment.newInstance())
+    private val fragments = arrayOf(HomeFragment.newInstance(), AsteroidFragment.newInstance(),PhotoEarthFragment.newInstance(), CoordinatorFragment.newInstance(), SettingsFragment.newInstance())
     //возращаем размер массива
     override fun getCount() = fragments.size
     //возрощаем фрагмент по позиции
