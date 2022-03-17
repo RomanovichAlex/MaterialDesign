@@ -7,48 +7,48 @@
     android:layout_height="match_parent">
     tools:context=".view.main.MainFragment">
 
-    <FrameLayout
-            android:id="@+id/fragment_container_theme_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        app:layoutDescription="@xml/fragment_home_xml_scene">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/search_wiki"
-            app:counterEnabled="true"
-            app:counterMaxLength="10"
-            app:endIconDrawable="@drawable/ic_wikipedia"
+            app:endIconDrawable="@drawable/ic_search"
             app:endIconMode="custom"
-            app:helperText="@string/wiki_helper_text"
-            app:layout_constraintBottom_toTopOf="@+id/tabs"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/search"
             app:layout_constraintStart_toStartOf="parent"
-            app:startIconDrawable="@drawable/ic_plus_fab">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputEditText"
-                style="@style/MyTextAppearanceHeadline1"
                 android:layout_width="match_parent"
-                android:layout_height="66dp"
-                android:textAppearance="@style/MyTextAppearanceHeadline1" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/wikipedia"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_wikipedia"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+             />
+
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/wikipedia">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -77,7 +77,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabs"
             app:srcCompat="@drawable/ic_no_photo_vector" />
 
 
@@ -100,15 +100,16 @@
                 tools:ignore="SpeakableTextPresentCheck" />-->
 
 
-    <FrameLayout
-        android:id="@+id/homeContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
     <include
         android:id="@+id/included"
         layout="@layout/bottom_sheet_layout"/>
 
+    <FrameLayout
+        android:id="@+id/homeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
