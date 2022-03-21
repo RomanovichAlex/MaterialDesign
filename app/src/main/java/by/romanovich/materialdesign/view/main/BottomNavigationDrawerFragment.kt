@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.BottomNavigationLayoutBinding
+import by.romanovich.materialdesign.view.animations.AnimationsActivity
 import by.romanovich.materialdesign.view.bottomnavigation.ApiBottomActivity
 import by.romanovich.materialdesign.view.viewpager.ApiActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -37,6 +38,9 @@ BottomNavigationDrawerFragment: BottomSheetDialogFragment() {
                 R.id.navigation_two -> {
                     startActivity(Intent(requireContext(), ApiBottomActivity::class.java))
                     //Toast.makeText(requireContext(), "navigation_two", Toast.LENGTH_SHORT).show()
+                }
+                R.id.navigation_three -> {
+                    startActivity(Intent(requireContext(), AnimationsActivity::class.java))
                 }
             }
             true
