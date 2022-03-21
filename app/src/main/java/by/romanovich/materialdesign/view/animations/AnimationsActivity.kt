@@ -6,25 +6,61 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.view.SurfaceControl
 import android.view.View
+import android.view.animation.AnticipateInterpolator
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.transition.ChangeBounds
+import androidx.transition.TransitionManager
+import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.ActivityAnimationsBinding
-
+import by.romanovich.materialdesign.databinding.ActivityAnimationsBonusStartBinding
 
 
 class AnimationsActivity : AppCompatActivity() {
-    private var flag = false
+    private var flag = true
     private val duration = 1000L
-    lateinit var binding: ActivityAnimationsBinding
+    private val mTension = 1f
+    lateinit var binding: ActivityAnimationsBonusStartBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAnimationsBinding.inflate(layoutInflater)
+        binding = ActivityAnimationsBonusStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //если изменяется ScrollListener
-        binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            //появляется тень у хэдера
-            binding.header.isSelected = binding.scrollView.canScrollVertically(- 1)
-        }
 
+        binding.backgroundImage.setOnClickListener{
+            flag = !flag
+            if (flag) {
+                val constraintSet = ConstraintSet()
+
+                //constraintSet клонирует в себя стартовый макет
+                constraintSet.clone(this, R.layout.activity_animations_bonus_start)
+
+                val changeBounds = ChangeBounds()
+                changeBounds.duration = duration
+                changeBounds.interpolator = AnticipateInterpolator(mTension)
+                //Добавляем плавности
+                TransitionManager.beginDelayedTransition(binding.constraintContainer, ChangeBounds())
+// и применяем к стартовому экрану
+                constraintSet.applyTo(binding.constraintContainer)
+            }else{
+                val constraintSet = ConstraintSet()
+
+
+                constraintSet.clone(this, R.layout.activity_animations_bonus_end)
+                /*//constraintSet клонирует в себя стартовый макет
+                constraintSet.clone(this, R.layout.activity_animations_bonus_start)
+                constraintSet.connect(R.id.title,ConstraintSet.END,R.id.constraint_container,ConstraintSet.END)
+                constraintSet.connect(R.id.title,ConstraintSet.TOP,R.id.constraint_container,ConstraintSet.TOP)
+                constraintSet.connect(R.id.title,ConstraintSet.START,R.id.constraint_container,ConstraintSet.START)
+*/
+                val changeBounds = ChangeBounds()
+                changeBounds.duration = duration
+                changeBounds.interpolator = AnticipateInterpolator(mTension)
+                TransitionManager.beginDelayedTransition(binding.constraintContainer, ChangeBounds())
+// и применяем к стартовому экрану
+                constraintSet.applyTo(binding.constraintContainer)
+            }
+        }
     }
 }
