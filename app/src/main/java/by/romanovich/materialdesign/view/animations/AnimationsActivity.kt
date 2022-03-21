@@ -3,15 +3,18 @@ package by.romanovich.materialdesign.view.animations
 import android.graphics.ImageDecoder
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.*
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.ActivityAnimationsBinding
+import kotlin.random.Random
 
 
 class AnimationsActivity : AppCompatActivity() {
@@ -23,19 +26,22 @@ class AnimationsActivity : AppCompatActivity() {
         binding = ActivityAnimationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.imageView.setOnClickListener {
+        binding.button.setOnClickListener {
             flag = !flag
             val changeBounds = ChangeBounds()
-            val changeImageTransform = ChangeImageTransform()
+            //кнопка едет по кривой
+            changeBounds.setPathMotion(ArcMotion())
             changeBounds.duration = 3000
-            changeImageTransform.duration = 3000
-            TransitionManager.beginDelayedTransition(binding.transitionsContainer,changeImageTransform)
 
-            if(flag){
-                binding.imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+            TransitionManager.beginDelayedTransition(binding.transitionsContainer,changeBounds)
+            //меняем параметры кнопки по отношению к своему фрайму
+            val params = binding.button.layoutParams as FrameLayout.LayoutParams
+            params.gravity = if(flag){
+               Gravity.BOTTOM or Gravity.END
             }else{
-                binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                Gravity.TOP or Gravity.START
             }
+            binding.button.layoutParams = params
         }
 
 
