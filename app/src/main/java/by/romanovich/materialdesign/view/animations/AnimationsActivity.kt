@@ -2,6 +2,7 @@ package by.romanovich.materialdesign.view.animations
 
 import android.graphics.ImageDecoder
 import android.graphics.Rect
+import android.hardware.biometrics.BiometricManager
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.*
@@ -26,22 +28,28 @@ class AnimationsActivity : AppCompatActivity() {
         binding = ActivityAnimationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val titles: MutableList<String> = ArrayList()
+        repeat(5){
+            titles.add("Item${it}")
+        }
+
         binding.button.setOnClickListener {
             flag = !flag
-            val changeBounds = ChangeBounds()
-            //кнопка едет по кривой
-            changeBounds.setPathMotion(ArcMotion())
-            changeBounds.duration = 3000
+            //перемешиваем
+            titles.shuffle()
+            TransitionManager.beginDelayedTransition(binding.transitionsContainer,ChangeBounds())
+            binding.transitionsContainer.removeAllViews()
 
-            TransitionManager.beginDelayedTransition(binding.transitionsContainer,changeBounds)
-            //меняем параметры кнопки по отношению к своему фрайму
-            val params = binding.button.layoutParams as FrameLayout.LayoutParams
-            params.gravity = if(flag){
-               Gravity.BOTTOM or Gravity.END
-            }else{
-                Gravity.TOP or Gravity.START
+            titles.forEach{
+                binding.transitionsContainer.addView(TextView(this).apply {
+                    text = it
+                    textSize = 20f
+                    //присваеваем удаленным элементам те же псевдонимы
+                    transitionName = it
+                    gravity = Gravity.CENTER_HORIZONTAL
+                })
             }
-            binding.button.layoutParams = params
+
         }
 
 
