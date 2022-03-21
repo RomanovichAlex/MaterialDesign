@@ -3,9 +3,9 @@ package by.romanovich.materialdesign.view.animations
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.*
+import androidx.transition.*
+import android.view.Gravity
 import android.view.View
-import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.ActivityAnimationsBinding
 
 
@@ -17,15 +17,17 @@ class AnimationsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAnimationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.button.setOnClickListener{
+
             val transitionSet = TransitionSet()
-            val fade = Fade()
-            val changeBounds = ChangeBounds()
-            fade.duration = 2000
-            changeBounds.duration = 5000
+            val slide = Slide(Gravity.END)
+            val explode = Explode()
+            slide.duration = 2000
+            explode.duration = 1000
             transitionSet.ordering = TransitionSet.ORDERING_SEQUENTIAL
-            transitionSet.addTransition(fade)
-            transitionSet.addTransition(changeBounds)
+            transitionSet.addTransition(slide)
+            //transitionSet.addTransition(explode)
             TransitionManager.beginDelayedTransition(binding.transitionsContainer,transitionSet)
             textIsVisible = !textIsVisible
             binding.text.visibility = if(textIsVisible) View.VISIBLE else View.GONE
