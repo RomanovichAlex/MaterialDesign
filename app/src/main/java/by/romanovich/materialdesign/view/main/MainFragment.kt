@@ -1,4 +1,5 @@
 package by.romanovich.materialdesign.view.main
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +13,11 @@ import by.romanovich.materialdesign.view.viewpager.MainViewPagerAdapter
 
 class MainFragment : Fragment() {
 
+
     //зануление банинга из за утечек памяти в он дестрой, чтоб в фоне не висел
     private var _binding: FragmentMainBinding? = null
     val binding: FragmentMainBinding
     get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
