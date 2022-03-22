@@ -18,6 +18,8 @@ class ButtonBehavior (context: Context, attributeSet: AttributeSet?=null): Coord
         return dependency is AppBarLayout
     }
 
+
+
     override fun onDependentViewChanged(
         parent: CoordinatorLayout,
         child: View,

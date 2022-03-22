@@ -27,6 +27,8 @@ class NestedBehavior(context: Context, attributeSet: AttributeSet): CoordinatorL
         child.y = bar.height + bar.y
 
         return super.onDependentViewChanged(parent, child, dependency)
+
+
     }
 
 

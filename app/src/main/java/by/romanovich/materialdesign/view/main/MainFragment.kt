@@ -1,5 +1,4 @@
 package by.romanovich.materialdesign.view.main
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

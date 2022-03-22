@@ -1,7 +1,6 @@
 
 package by.romanovich.materialdesign.repository.mars
 
-import android.os.Parcel
 import com.google.gson.annotations.SerializedName
 
 data class MarsServerResponse(

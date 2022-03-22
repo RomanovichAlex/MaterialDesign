@@ -2,12 +2,8 @@ package by.romanovich.materialdesign.view
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.Group
 import by.romanovich.materialdesign.R
-import by.romanovich.materialdesign.view.coordinator.CoordinatorFragment
 import by.romanovich.materialdesign.view.main.MainFragment
 
 

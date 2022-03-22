@@ -1,16 +1,15 @@
 package by.romanovich.materialdesign.view.coordinator
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.Fragment
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentCoordinatorBinding
-import by.romanovich.materialdesign.databinding.FragmentPhotoEarthBinding
+
 
 class CoordinatorFragment : Fragment() {
 
@@ -20,7 +19,7 @@ class CoordinatorFragment : Fragment() {
         return _binding!!
     }
 
-
+    private val duration = 1000L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +27,7 @@ class CoordinatorFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_coordinator, container, false)
+
 
 }
 
@@ -40,6 +40,7 @@ class CoordinatorFragment : Fragment() {
         val button = view.findViewById<Button>(R.id.fab)
         //получили  параметры контейнера(кординатор лайаут) которые вешаем на кнопку
         (button.layoutParams as CoordinatorLayout.LayoutParams).behavior = buttonBehavior
+
     }
 
     companion object {

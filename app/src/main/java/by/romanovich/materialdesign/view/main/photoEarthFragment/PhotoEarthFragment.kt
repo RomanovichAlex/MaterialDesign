@@ -1,19 +1,19 @@
 package by.romanovich.materialdesign.view.main.photoEarthFragment
 
+
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.BuildConfig
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentPhotoEarthBinding
-
-
 import by.romanovich.materialdesign.viewmodel.AppState
 import by.romanovich.materialdesign.viewmodel.PhotoEarthViewModel
 import coil.load
@@ -48,168 +48,9 @@ class PhotoEarthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setFAB()
+
         viewModel.getData().observe(viewLifecycleOwner) { render(it) }
-
-        binding.transparentBackground.alpha = 0f
-        binding.optionOneContainer.alpha = 0f
-        binding.optionOneContainer.isClickable= false
-        binding.optionTwoContainer.alpha = 0f
-        binding.optionTwoContainer.isClickable= false
-
-
-        binding.fab.setOnClickListener {
-            flag = ! flag
-            if (flag) {
-                //крутим +
-                //ObjectAnimator.ofFloat(binding.plusImageview,"rotation",0f,405f).start()
-                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 0f, 405f).
-                setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y, 0f, -130f).
-                setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, 0f, -260f).
-                setDuration(duration).start()
-
-                //анимируем выезджание
-                binding.optionTwoContainer.animate().alpha(1f)
-                    .setDuration(duration)
-                    .setListener(object: AnimatorListenerAdapter(){
-                        override fun onAnimationEnd(animation: Animator?) {
-                            binding.optionTwoContainer.isClickable= true
-                            binding.buttonMars.setOnClickListener {
-                                viewModel.sendRequestMars()
-
-                                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 405f, 0f).
-                                setDuration(duration).start()
-                                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y, -130f, 0f).
-                                setDuration(duration).start()
-                                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, -260f, 0f).
-                                setDuration(duration).start()
-
-                                binding.optionTwoContainer.animate().alpha(0f)
-                                    .setDuration(duration)
-                                    .setListener(object: AnimatorListenerAdapter(){
-                                        override fun onAnimationEnd(animation: Animator?) {
-                                            binding.optionTwoContainer.isClickable= false
-                                            super.onAnimationEnd(animation)
-                                        }
-                                    })
-                                binding.optionOneContainer.animate().alpha(0f)
-                                    .setDuration(duration)
-                                    .setListener(object: AnimatorListenerAdapter(){
-                                        override fun onAnimationEnd(animation: Animator?) {
-                                            binding.optionOneContainer.isClickable= false
-                                            super.onAnimationEnd(animation)
-                                        }
-                                    })
-
-                                binding.transparentBackground.animate().alpha(0f)
-                                    .setDuration(duration)
-                                    .setListener(object: AnimatorListenerAdapter(){
-                                        override fun onAnimationEnd(animation: Animator?) {
-                                            binding.transparentBackground.isClickable= false
-                                            super.onAnimationEnd(animation)
-                                        }
-                                    })
-                            }
-                            super.onAnimationEnd(animation)
-                        }
-                    })
-                //анимируем выезджание
-                binding.optionOneContainer.animate().alpha(1f)
-                    .setDuration(duration)
-                    .setListener(object: AnimatorListenerAdapter(){
-                        override fun onAnimationEnd(animation: Animator?) {
-                            binding.optionOneContainer.isClickable= true
-                            binding.buttonEarth.setOnClickListener {
-                                viewModel.sendRequestEarth()
-
-                                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 405f, 0f).
-                                setDuration(duration).start()
-                                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y, -130f, 0f).
-                                setDuration(duration).start()
-                                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, -260f, 0f).
-                                setDuration(duration).start()
-
-                                binding.optionTwoContainer.animate().alpha(0f)
-                                    .setDuration(duration)
-                                    .setListener(object: AnimatorListenerAdapter(){
-                                        override fun onAnimationEnd(animation: Animator?) {
-                                            binding.optionTwoContainer.isClickable= false
-                                            super.onAnimationEnd(animation)
-                                        }
-                                    })
-                                binding.optionOneContainer.animate().alpha(0f)
-                                    .setDuration(duration)
-                                    .setListener(object: AnimatorListenerAdapter(){
-                                        override fun onAnimationEnd(animation: Animator?) {
-                                            binding.optionOneContainer.isClickable= false
-                                            super.onAnimationEnd(animation)
-                                        }
-                                    })
-
-                                binding.transparentBackground.animate().alpha(0f)
-                                    .setDuration(duration)
-                                    .setListener(object: AnimatorListenerAdapter(){
-                                        override fun onAnimationEnd(animation: Animator?) {
-                                            binding.transparentBackground.isClickable= false
-                                            super.onAnimationEnd(animation)
-                                        }
-                                    })
-
-                            }
-                            super.onAnimationEnd(animation)
-
-                        }
-                    })
-
-                //анимируем затемнение фона
-                binding.transparentBackground.animate().alpha(0.8f)
-                    .setDuration(duration)
-                    .setListener(object: AnimatorListenerAdapter(){
-                        override fun onAnimationEnd(animation: Animator?) {
-                            binding.transparentBackground.isClickable= false
-                            super.onAnimationEnd(animation)
-                        }
-                    })
-            }else{
-                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 405f, 0f).
-                setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y, -130f, 0f).
-                setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, -260f, 0f).
-                setDuration(duration).start()
-
-                binding.optionTwoContainer.animate().alpha(0f)
-                    .setDuration(duration)
-                    .setListener(object: AnimatorListenerAdapter(){
-                        override fun onAnimationEnd(animation: Animator?) {
-                            binding.optionTwoContainer.isClickable= false
-                            super.onAnimationEnd(animation)
-                        }
-                    })
-                binding.optionOneContainer.animate().alpha(0f)
-                    .setDuration(duration)
-                    .setListener(object: AnimatorListenerAdapter(){
-                        override fun onAnimationEnd(animation: Animator?) {
-                            binding.optionOneContainer.isClickable= false
-                            super.onAnimationEnd(animation)
-                        }
-                    })
-
-                binding.transparentBackground.animate().alpha(0f)
-                    .setDuration(duration)
-                    .setListener(object: AnimatorListenerAdapter(){
-                        override fun onAnimationEnd(animation: Animator?) {
-                            binding.transparentBackground.isClickable= false
-                            super.onAnimationEnd(animation)
-                        }
-                    })
-            }
-        }
-
-
-
-
 
 
         binding.chipsGroup2.setOnCheckedChangeListener { _, checkedId ->
@@ -254,6 +95,121 @@ class PhotoEarthFragment : Fragment() {
                     binding.customImageView2.load(url)
                 }
             }
+        }
+    }
+
+
+    private fun setFAB() {
+        setInitialState()
+        binding.fab.setOnClickListener {
+            if (flag) {
+                collapseFab()
+
+            } else {
+                expandFAB()
+
+            }
+        }
+    }
+
+    private fun expandFAB() {
+        flag = true
+        ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 0f, 405f).setDuration(duration).start()
+        ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y, 0f, -130f).
+        setDuration(duration).start()
+        ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, 0f, -260f).
+        setDuration(duration).start()
+
+        binding.optionTwoContainer.animate().alpha(1f)
+            .setDuration(duration)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    binding.optionTwoContainer.isClickable= true
+                    super.onAnimationEnd(animation)
+                        binding.optionTwoContainer.setOnClickListener {
+                            viewModel.sendRequestEarth()
+                            Toast.makeText(requireContext(), "Earth", Toast.LENGTH_SHORT)
+                                .show()
+                            collapseFab()
+                        }
+                    super.onAnimationEnd(animation)
+                }
+            })
+        binding.optionOneContainer.animate()
+            .alpha(1f)
+            .setDuration(duration)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    binding.optionOneContainer.isClickable = true
+                    binding.optionOneContainer.isClickable= true
+                    binding.optionOneContainer.setOnClickListener {
+                        viewModel.sendRequestMars()
+                        Toast.makeText(requireContext(), "Mars", Toast.LENGTH_SHORT)
+                            .show()
+                        collapseFab()
+                    }
+                    super.onAnimationEnd(animation)
+                }
+            })
+        binding.transparentBackground.animate()
+            .alpha(0.8f)
+            .setDuration(duration)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    binding.transparentBackground.isClickable = true
+                }
+            })
+    }
+
+
+    private fun collapseFab() {
+        flag = !flag
+        ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 405f, 0f).setDuration(duration).start()
+        ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y, -130f, 0f).
+        setDuration(duration).start()
+        ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, -260f, 0f).
+        setDuration(duration).start()
+
+        binding.optionTwoContainer.animate()
+            .alpha(0f)
+            .setDuration(duration)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    binding.optionTwoContainer.isClickable = false
+                    super.onAnimationEnd(animation)
+                    binding.optionOneContainer.setOnClickListener(null)
+                }
+            })
+        binding.optionOneContainer.animate().alpha(0f)
+            .setDuration(duration)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    binding.optionOneContainer.isClickable= false
+                    super.onAnimationEnd(animation)
+                }
+            })
+        binding.transparentBackground.animate().alpha(0f)
+            .setDuration(duration)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    binding.transparentBackground.isClickable= false
+                    super.onAnimationEnd(animation)
+                }
+            })
+    }
+
+
+    private fun setInitialState() {
+        binding.transparentBackground.apply {
+            alpha = 0f
+        }
+        binding.optionTwoContainer.apply {
+            alpha = 0f
+            isClickable = false
+        }
+        binding.optionOneContainer.apply {
+            alpha = 0f
+            isClickable = false
         }
     }
 

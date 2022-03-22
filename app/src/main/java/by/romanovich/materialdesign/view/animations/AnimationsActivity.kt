@@ -2,19 +2,13 @@ package by.romanovich.materialdesign.view.animations
 
 
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.view.SurfaceControl
-import android.view.View
 import android.view.animation.AnticipateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
 import by.romanovich.materialdesign.R
-import by.romanovich.materialdesign.databinding.ActivityAnimationsBinding
 import by.romanovich.materialdesign.databinding.ActivityAnimationsBonusStartBinding
 
 
