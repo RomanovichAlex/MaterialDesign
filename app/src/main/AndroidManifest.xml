@@ -15,6 +15,7 @@
             android:name=".view.animations.AnimationsActivity"
             android:exported="true" >
 
+
         </activity>
 
 
@@ -27,6 +28,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
 
         </activity>
         <activity

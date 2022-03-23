@@ -105,9 +105,9 @@ class PhotoEarthFragment : Fragment() {
             if (flag) {
                 collapseFab()
 
+
             } else {
                 expandFAB()
-
             }
         }
     }

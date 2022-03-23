@@ -218,17 +218,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="textView,cardView" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:background="@drawable/play_pause_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?superColor"
+        android:checked="true"
+        android:thumb="@null"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_margin="20dp"
         app:cardElevation="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         tools:ignore="MissingConstraints" />
 
@@ -240,12 +255,6 @@
         app:barrierDirection="end"
         app:constraint_referenced_ids="textView" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="textView" />
 
     <TextView
         android:id="@+id/textView"

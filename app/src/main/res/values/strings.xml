@@ -34,6 +34,11 @@
     <string name="chip_moon_hd">Moon HD</string>
 
 
+    <string name="pause_left">M26,23 V41</string>
+    <string name="pause_right">M37,23 L37,32 L37,41</string>
+    <string name="pause_right_play">M26,23 L41,32 L27,41</string>
+    <string name="clockwise_circle">M32,8 A24,24 0 1 1 31.99,8 z</string>
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
