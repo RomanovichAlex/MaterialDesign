@@ -9,12 +9,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnticipateOvershootInterpolator
 import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.ChangeBounds
+import androidx.transition.TransitionManager
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentHomeBinding
 import by.romanovich.materialdesign.viewmodel.AppState
@@ -28,6 +32,7 @@ import java.util.*
 
 class HomeFragment : Fragment() {
 
+    var flag = false
 
     lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     //зануление банинга из за утечек памяти в он дестрой, чтоб в фоне не висел
@@ -63,6 +68,7 @@ class HomeFragment : Fragment() {
         viewModel.sendRequest(takeDate(0))
 
         tabLayoutInit()
+
 
 
 

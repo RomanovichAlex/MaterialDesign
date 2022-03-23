@@ -9,6 +9,7 @@ import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.BottomNavigationLayoutBinding
 import by.romanovich.materialdesign.view.animations.AnimationsActivity
 import by.romanovich.materialdesign.view.bottomnavigation.ApiBottomActivity
+import by.romanovich.materialdesign.view.recycler.RecyclerActivity
 import by.romanovich.materialdesign.view.viewpager.ApiActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -42,7 +43,12 @@ BottomNavigationDrawerFragment: BottomSheetDialogFragment() {
                 R.id.navigation_three -> {
                     startActivity(Intent(requireContext(), AnimationsActivity::class.java))
                 }
+                R.id.navigation_four -> {
+                    startActivity(Intent(requireContext(), RecyclerActivity::class.java))
+                }
+
             }
+            dismiss()
             true
         }
     }

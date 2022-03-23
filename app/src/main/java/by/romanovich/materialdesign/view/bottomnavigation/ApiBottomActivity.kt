@@ -1,10 +1,12 @@
 package by.romanovich.materialdesign.view.bottomnavigation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.ActivityApiBottomBinding
+import by.romanovich.materialdesign.view.recycler.RecyclerActivity
 import by.romanovich.materialdesign.view.viewpager.EarthFragment
 import by.romanovich.materialdesign.view.viewpager.MarsFragment
 import by.romanovich.materialdesign.view.viewpager.SystemFragment
@@ -20,7 +22,7 @@ class ApiBottomActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.bottomNavigationView.setOnItemSelectedListener {
+        /*binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.bottom_view_earth->{
                     navigateTo(EarthFragment())
@@ -30,6 +32,10 @@ class ApiBottomActivity : AppCompatActivity() {
                 }
                 R.id.bottom_view_mars->{
                     navigateTo(MarsFragment())
+                    true
+                }
+                R.id.bottom_view_system->{
+                    navigateTo(SystemFragment())
                     true
                 }
                 R.id.bottom_view_system->{
@@ -55,5 +61,6 @@ class ApiBottomActivity : AppCompatActivity() {
     }
     fun navigateTo(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.container,fragment).commit()
+    }*/
     }
 }
