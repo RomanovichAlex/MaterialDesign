@@ -14,6 +14,7 @@ class RecyclerActivity : AppCompatActivity() {
         binding = ActivityRecyclerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val data = arrayListOf(
+            //Data("",type = TYPE_HEADER),
             Data("Earth",type = TYPE_EARTH),
             Data("Earth",type = TYPE_EARTH),
             Data("Mars", "",type = TYPE_MARS),
@@ -22,6 +23,7 @@ class RecyclerActivity : AppCompatActivity() {
             Data("Earth",type = TYPE_EARTH),
             Data("Mars", "",type = TYPE_MARS)
         )
+        data.add(0, Data("Заголовок",type = TYPE_HEADER))
 
         binding.recyclerView.adapter = RecyclerActivityAdapter (OnListItemClickListener{
             Toast.makeText(this@RecyclerActivity,it.someText, Toast.LENGTH_SHORT).show()
