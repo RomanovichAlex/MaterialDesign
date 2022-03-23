@@ -34,13 +34,11 @@ class RecyclerActivityAdapter(private val onListItemClickListener:OnListItemClic
                 ActivityRecyclerItemHeaderBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false)
             return HeaderViewHolder(itemBinding.root)
-
         }
     }
 
     //связываем созданый ViewHolder с данными
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-
         holder.bind(data[position])
     }
 
