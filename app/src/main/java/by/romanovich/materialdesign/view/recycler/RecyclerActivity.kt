@@ -25,8 +25,16 @@ class RecyclerActivity : AppCompatActivity() {
         )
         data.add(0, Data("Заголовок",type = TYPE_HEADER))
 
-        binding.recyclerView.adapter = RecyclerActivityAdapter (OnListItemClickListener{
+        val adapter = RecyclerActivityAdapter (OnListItemClickListener{
             Toast.makeText(this@RecyclerActivity,it.someText, Toast.LENGTH_SHORT).show()
         },data)
+
+        binding.recyclerView.adapter = adapter
+
+        binding.recyclerActivityFAB.setOnClickListener {
+            adapter.addItem()
+
+            binding.recyclerView.smoothScrollToPosition(adapter.itemCount -1)
+        }
     }
 }
