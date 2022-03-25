@@ -1,5 +1,7 @@
 package by.romanovich.materialdesign.view.recycler
 
+import androidx.recyclerview.widget.RecyclerView
+
 interface ItemTouchHelperAdapter {
     //передвинули
     fun onItemMove(fromPosition: Int,toPosition: Int)
@@ -14,4 +16,9 @@ interface ItemTouchHelperViewAdapter {
     fun onItemSelected()
     //не выбран
     fun onItemClear()
+}
+
+//перетаскивание
+fun interface OnStartDragListener {
+    fun onStartDrag(viewHolder: RecyclerView.ViewHolder)
 }

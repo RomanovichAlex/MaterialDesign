@@ -2,8 +2,10 @@ package by.romanovich.materialdesign.view.recycler
 
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MotionEventCompat
 import androidx.recyclerview.widget.RecyclerView
 
 import by.romanovich.materialdesign.databinding.ActivityRecyclerItemEarthBinding
@@ -12,30 +14,35 @@ import by.romanovich.materialdesign.databinding.ActivityRecyclerItemMarsBinding
 
 
 class RecyclerActivityAdapter(private val onListItemClickListener:OnListItemClickListener,
-                              private val dataSet: MutableList<Pair<Int,Data>>):
+                              private val dataSet: MutableList<Pair<Int,Data>>,
+                              private val onStartDragListener : OnStartDragListener):
     RecyclerView.Adapter<RecyclerActivityAdapter.BaseViewHolder>(), ItemTouchHelperAdapter {
 
     override fun getItemViewType(position: Int): Int {
-        return dataSet[position].second.type
+        return dataSet[position].second.type//viewType
     }
     //создаем
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        if (viewType == TYPE_EARTH) {
-            val itemBinding: ActivityRecyclerItemEarthBinding =
-                ActivityRecyclerItemEarthBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false)
-            return EarthViewHolder(itemBinding.root)
-        }else if (viewType == TYPE_MARS) {
-            val itemBinding: ActivityRecyclerItemMarsBinding =
-                ActivityRecyclerItemMarsBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false)
-            return MarsViewHolder(itemBinding.root)
-            
-        } else {
-            val itemBinding: ActivityRecyclerItemHeaderBinding =
-                ActivityRecyclerItemHeaderBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false)
-            return HeaderViewHolder(itemBinding.root)
+        when (viewType) {
+            TYPE_EARTH -> {
+                val itemBinding: ActivityRecyclerItemEarthBinding =
+                    ActivityRecyclerItemEarthBinding.inflate(
+                        LayoutInflater.from(parent.context), parent, false)
+                return EarthViewHolder(itemBinding.root)
+            }
+            TYPE_MARS -> {
+                val itemBinding: ActivityRecyclerItemMarsBinding =
+                    ActivityRecyclerItemMarsBinding.inflate(
+                        LayoutInflater.from(parent.context), parent, false)
+                return MarsViewHolder(itemBinding.root)
+
+            }
+            else -> {
+                val itemBinding: ActivityRecyclerItemHeaderBinding =
+                    ActivityRecyclerItemHeaderBinding.inflate(
+                        LayoutInflater.from(parent.context), parent, false)
+                return HeaderViewHolder(itemBinding.root)
+            }
         }
     }
 
@@ -59,7 +66,7 @@ class RecyclerActivityAdapter(private val onListItemClickListener:OnListItemClic
     }
 
     inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Pair<Int,Data>) {
+        override fun bind(data: Pair<Int, Data>) {
             ActivityRecyclerItemEarthBinding.bind(itemView).apply {
                 earthImageView.setOnClickListener {
                     onListItemClickListener.onListItem(data.second)
@@ -72,22 +79,25 @@ class RecyclerActivityAdapter(private val onListItemClickListener:OnListItemClic
                 }
 
             }
+        }
 
-        }fun removeItem(){
-           // data.removeAt(adapterPosition)
+        fun removeItem() {
+            // data.removeAt(adapterPosition)
             //удаляет то что видит пользователь
             dataSet.removeAt(layoutPosition)
             //обновить всё
             notifyDataSetChanged()
         }
-        fun addItemByPosition(){
+
+        fun addItemByPosition() {
             //добавляет по позиции снизу
-            dataSet.add(layoutPosition+1, generateNewItem())
+            dataSet.add(layoutPosition + 1, generateNewItem())
             //сохраняет изменения notifyItemInserted(layoutPosition)
             //удаление обновляется по позиции + анимация
             notifyItemRemoved(layoutPosition)
         }
     }
+
 
     inner class MarsViewHolder(view: View) : BaseViewHolder(view),ItemTouchHelperViewAdapter {
         override fun bind(data: Pair<Int,Data>) {
@@ -114,6 +124,15 @@ View.VISIBLE
                     // дерганно notifyDataSetChanged(layoutPosition)
                 }
                 marsDescriptionTextView.visibility = if(data.first== ITEM_CLOSE) View.GONE else View.VISIBLE
+
+                dragHandleImageView.setOnTouchListener { v, event ->
+                    //если произошло нажатие кнопки
+                    if(MotionEventCompat.getActionMasked(event)== MotionEvent.ACTION_DOWN){
+                        onStartDragListener.onStartDrag(this@MarsViewHolder)
+                    }
+                    false
+                }
+
             }
         }
 
@@ -174,12 +193,11 @@ View.VISIBLE
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
 
+        if (fromPosition != 1) {
 
-        //TODO поднимать элементы выше заголовка hw
-
-
-        dataSet.removeAt(fromPosition).apply {
-            dataSet.add(fromPosition , this)
+            dataSet.removeAt(fromPosition).apply {
+                dataSet.add(toPosition, this)
+            }
         }
         notifyItemMoved(fromPosition, toPosition)
     }

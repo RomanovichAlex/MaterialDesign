@@ -12,8 +12,8 @@ import by.romanovich.materialdesign.databinding.ActivityRecyclerBinding
 class RecyclerActivity : AppCompatActivity() {
 
     lateinit var adapter : RecyclerActivityAdapter
-
     lateinit var binding: ActivityRecyclerBinding
+    lateinit var itemTouchHelper: ItemTouchHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecyclerBinding.inflate(layoutInflater)
@@ -29,6 +29,29 @@ class RecyclerActivity : AppCompatActivity() {
             Pair(ITEM_CLOSE, Data("Mars", "", type = TYPE_MARS))
         )
         data.add(0, Pair(ITEM_CLOSE, Data("Заголовок", type = TYPE_HEADER)))
+
+        /*
+    подсказка по пункту
+    * Добавьте назначение приоритета заметкам.
+    data.filter {
+       it.second.someText.equals("swefg")
+       //it.second.someText.contains("swefg")
+       //it.second.weight==1000
+    }
+         */
+
+/*
+подсказка по пункту
+* Добавьте назначение приоритета заметкам.
+data.get(2).second.weight = 1000
+data.sortWith{l,r->
+   if(l.second.weight>r.second.weight){
+       -1
+   }else{
+       1
+   }
+}*/
+
 
         val lat = 23
         val lon = 21
@@ -50,18 +73,21 @@ class RecyclerActivity : AppCompatActivity() {
 
         adapter = RecyclerActivityAdapter(OnListItemClickListener {
             Toast.makeText(this@RecyclerActivity, it.someText, Toast.LENGTH_SHORT).show()
-        }, data)
+        }, data,{
+            itemTouchHelper.startDrag(it)
+        })
 
         binding.recyclerView.adapter = adapter
-
+        //передаем коллбэк и запускаем прикрепив к рецайкл вью
+        itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(adapter))
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
         binding.recyclerActivityFAB.setOnClickListener {
             adapter.addItem()
 
             binding.recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
         }
 
-        //передаем коллбэк и запускаем прикрепив к рецайкл вью
-        ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.recyclerView)
+
     }
 
 
@@ -73,7 +99,7 @@ class RecyclerActivity : AppCompatActivity() {
         }
 
         override fun isItemViewSwipeEnabled(): Boolean {
-            return super.isItemViewSwipeEnabled()
+            return true
         }
         override fun getMovementFlags(
             recyclerView: RecyclerView,
