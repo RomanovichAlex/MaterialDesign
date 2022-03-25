@@ -4,6 +4,7 @@ package by.romanovich.materialdesign.view.main.photoEarthFragment
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.BuildConfig
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentPhotoEarthBinding
+import by.romanovich.materialdesign.view.notes.NotesActivity
 import by.romanovich.materialdesign.viewmodel.AppState
 import by.romanovich.materialdesign.viewmodel.PhotoEarthViewModel
 import coil.load
@@ -52,6 +54,9 @@ class PhotoEarthFragment : Fragment() {
 
         viewModel.getData().observe(viewLifecycleOwner) { render(it) }
 
+        binding.buttonNotes.setOnClickListener {
+            startActivity(Intent(requireContext(), NotesActivity::class.java))
+        }
 
         binding.chipsGroup2.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {

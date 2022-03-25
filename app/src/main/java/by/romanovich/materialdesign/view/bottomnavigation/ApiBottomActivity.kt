@@ -1,16 +1,8 @@
 package by.romanovich.materialdesign.view.bottomnavigation
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.ActivityApiBottomBinding
-import by.romanovich.materialdesign.view.recycler.RecyclerActivity
-import by.romanovich.materialdesign.view.viewpager.EarthFragment
-import by.romanovich.materialdesign.view.viewpager.MarsFragment
-import by.romanovich.materialdesign.view.viewpager.SystemFragment
-import com.google.android.material.badge.BadgeDrawable
 
 
 class ApiBottomActivity : AppCompatActivity() {

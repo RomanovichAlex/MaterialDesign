@@ -133,6 +133,7 @@
     <string name="apibottomactivity">ApiBottomActivity</string>
     <string name="animationsactivity">AnimationsActivity</string>
     <string name="recycleractivity">RecyclerActivity</string>
+    <string name="Notes">ЗАМЕТКИ</string>
 
 
 </resources>

@@ -1,62 +1,33 @@
-package by.romanovich.materialdesign.view.recycler
+package by.romanovich.materialdesign.view.notes
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import by.romanovich.materialdesign.databinding.ActivityRecyclerBinding
+import by.romanovich.materialdesign.databinding.ActivityNotesRecyclerBinding
 
-class RecyclerActivity : AppCompatActivity() {
 
-    lateinit var adapter : RecyclerActivityAdapter
-    lateinit var binding: ActivityRecyclerBinding
+class NotesActivity : AppCompatActivity() {
+    lateinit var adapter: NotesRecyclerActivityAdapter
+    lateinit var binding: ActivityNotesRecyclerBinding
     lateinit var itemTouchHelper: ItemTouchHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRecyclerBinding.inflate(layoutInflater)
+        binding = ActivityNotesRecyclerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val data = arrayListOf(
             //Data("",type = TYPE_HEADER),
-            Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
-            Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
-            Pair(ITEM_CLOSE, Data("Mars", "", type = TYPE_MARS)),
-            Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
-            Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
-            Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
-            Pair(ITEM_CLOSE, Data("Mars", "", type = TYPE_MARS))
+            Pair(ITEM_CLOSE, Data("Earth"))
+
         )
-        data.add(0, Pair(ITEM_CLOSE, Data("Заголовок", type = TYPE_HEADER)))
-
-        /*
-    подсказка по пункту
-    * Добавьте назначение приоритета заметкам.
-    data.filter {
-       it.second.someText.equals("swefg")
-       //it.second.someText.contains("swefg")
-       //it.second.weight==1000
-    }
-         */
-
-/*
-подсказка по пункту
-* Добавьте назначение приоритета заметкам.
-data.get(2).second.weight = 1000
-data.sortWith{l,r->
-   if(l.second.weight>r.second.weight){
-       -1
-   }else{
-       1
-   }
-}*/
-
 
         val lat = 23
         val lon = 21
 
         val pair1 = Pair(lat, lon)
         val pair2 = lat to lon
-        val pair3 = Triple(lon, lon, lon)
+
 
         pair1.first
         pair1.second
@@ -64,13 +35,9 @@ data.sortWith{l,r->
         pair2.first
         pair2.second
 
-        pair3.first
-        pair3.second
-        pair3.third
 
-
-        adapter = RecyclerActivityAdapter(OnListItemClickListener {
-            Toast.makeText(this@RecyclerActivity, it.someText, Toast.LENGTH_SHORT).show()
+        adapter = NotesRecyclerActivityAdapter(OnListItemClickListener {
+            Toast.makeText(this@NotesActivity, it.someText, Toast.LENGTH_SHORT).show()
         }, data,{
             itemTouchHelper.startDrag(it)
         })
@@ -84,12 +51,10 @@ data.sortWith{l,r->
 
             binding.recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
         }
-
-
     }
 
 
-    class ItemTouchHelperCallback(private val adapter: RecyclerActivityAdapter): ItemTouchHelper.Callback(){
+    class ItemTouchHelperCallback(private val adapter: NotesRecyclerActivityAdapter): ItemTouchHelper.Callback(){
 
         //сработает перетаскивание
         override fun isLongPressDragEnabled(): Boolean {
@@ -130,19 +95,18 @@ data.sortWith{l,r->
 
         override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
             //если марс то работаем, если земля то нет
-            if (viewHolder !is RecyclerActivityAdapter.MarsViewHolder){
+            if (viewHolder !is NotesRecyclerActivityAdapter.NoteViewHolder){
                 return super.onSelectedChanged(viewHolder, actionState)
             }
             //если в состоянии работы
             if(actionState!=ItemTouchHelper.ACTION_STATE_IDLE){
                 (viewHolder as ItemTouchHelperViewAdapter).onItemSelected()
             }
-
         }
 
         override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
 //если марс то работаем, если земля то нет
-            if (viewHolder !is RecyclerActivityAdapter.MarsViewHolder){
+            if (viewHolder !is NotesRecyclerActivityAdapter.NoteViewHolder){
                 return super.clearView(recyclerView, viewHolder)
             }
             //подкрашиваем

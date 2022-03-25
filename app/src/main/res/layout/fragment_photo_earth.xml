@@ -31,6 +31,15 @@
             android:text="@string/chip_mars_today" />
     </com.google.android.material.chip.ChipGroup>
 
+    <Button
+        android:id="@+id/buttonNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Заметки"
+        android:textSize="40sp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center|bottom"/>
+
 
 
     <by.romanovich.materialdesign.utils.EquilateralImageView
