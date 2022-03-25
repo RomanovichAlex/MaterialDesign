@@ -1,11 +1,9 @@
 package by.romanovich.materialdesign.view.recycler
 
-import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.Size
 import androidx.recyclerview.widget.RecyclerView
 
 import by.romanovich.materialdesign.databinding.ActivityRecyclerItemEarthBinding
@@ -14,11 +12,11 @@ import by.romanovich.materialdesign.databinding.ActivityRecyclerItemMarsBinding
 
 
 class RecyclerActivityAdapter(private val onListItemClickListener:OnListItemClickListener,
-                              private val dataSet: MutableList<Data>):
-    RecyclerView.Adapter<RecyclerActivityAdapter.BaseViewHolder>() {
+                              private val dataSet: MutableList<Pair<Int,Data>>):
+    RecyclerView.Adapter<RecyclerActivityAdapter.BaseViewHolder>(), ItemTouchHelperAdapter {
 
     override fun getItemViewType(position: Int): Int {
-        return dataSet[position].type
+        return dataSet[position].second.type
     }
     //создаем
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
@@ -53,18 +51,18 @@ class RecyclerActivityAdapter(private val onListItemClickListener:OnListItemClic
         notifyItemInserted(itemCount-1)
     }
 
-    private fun generateNewItem() = Data("new Mars", type = TYPE_MARS)
+    private fun generateNewItem() = Pair(ITEM_CLOSE,Data("new Mars", type = TYPE_MARS))
 
     abstract class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        abstract fun bind(data: Data)
+        abstract fun bind(data: Pair<Int,Data>)
 
     }
 
     inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+        override fun bind(data: Pair<Int,Data>) {
             ActivityRecyclerItemEarthBinding.bind(itemView).apply {
                 earthImageView.setOnClickListener {
-                    onListItemClickListener.onListItem(data)
+                    onListItemClickListener.onListItem(data.second)
                 }
                 addItemImageView.setOnClickListener {
                     addItemByPosition()
@@ -91,26 +89,31 @@ class RecyclerActivityAdapter(private val onListItemClickListener:OnListItemClic
         }
     }
 
-    inner class MarsViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+    inner class MarsViewHolder(view: View) : BaseViewHolder(view),ItemTouchHelperViewAdapter {
+        override fun bind(data: Pair<Int,Data>) {
             ActivityRecyclerItemMarsBinding.bind(itemView).apply {
                 marsImageView.setOnClickListener {
-                    onListItemClickListener.onListItem(data)
+                    onListItemClickListener.onListItem(data.second)
                 }
-                addItemImageView.setOnClickListener {
-                    addItemByPosition()
+                addItemImageView.setOnClickListener { addItemByPosition() }
+                removeItemImageView.setOnClickListener { removeItem() }
+                moveItemUp.setOnClickListener { moveUp() }
+                moveItemDown.setOnClickListener { moveDown() }
+                marsTextView.setOnClickListener{
+                    //дерганно
+                   /* marsDescriptionTextView.visibility = if (marsDescriptionTextView.visibility==View.VISIBLE) View.GONE else {
+View.VISIBLE
+                    }*/
+                    //более плавно
+                    dataSet[layoutPosition] = dataSet[layoutPosition].let {
+                        val currentState = if(it.first== ITEM_CLOSE) ITEM_OPEN else  ITEM_CLOSE
+                        Pair(currentState,it.second)
+                    }
+                    //применяем изменения более плавно
+                    notifyItemChanged(layoutPosition)
+                    // дерганно notifyDataSetChanged(layoutPosition)
                 }
-                removeItemImageView.setOnClickListener {
-                    removeItem()
-                }
-                moveItemUp.setOnClickListener {
-                    //
-                    moveUp()
-                }
-                moveItemDown.setOnClickListener {
-//
-                    moveDown()
-                }
+                marsDescriptionTextView.visibility = if(data.first== ITEM_CLOSE) View.GONE else View.VISIBLE
             }
         }
 
@@ -147,15 +150,42 @@ class RecyclerActivityAdapter(private val onListItemClickListener:OnListItemClic
                 //сохраняет изменения
                 notifyItemInserted(layoutPosition)
             }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
         }
 
+        //когда перетаскивание закончилось
+        override fun onItemClear() {
+            //цвет сбрасываем
+            itemView.setBackgroundColor(0)
+        }
+    }
+
     inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+        override fun bind(data: Pair<Int,Data>) {
             ActivityRecyclerItemHeaderBinding.bind(itemView).apply {
                 header.setOnClickListener {
-                    onListItemClickListener.onListItem(data)
+                    onListItemClickListener.onListItem(data.second)
                 }
             }
         }
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+
+
+        //TODO поднимать элементы выше заголовка hw
+
+
+        dataSet.removeAt(fromPosition).apply {
+            dataSet.add(fromPosition , this)
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        dataSet.removeAt(position)
+        notifyItemRemoved(position)
     }
 }
