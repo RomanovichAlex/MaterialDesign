@@ -18,7 +18,7 @@ class NotesActivity : AppCompatActivity() {
         setContentView(binding.root)
         val data = arrayListOf(
             //Data("",type = TYPE_HEADER),
-            Pair(ITEM_CLOSE, Data("Earth"))
+            Pair(ITEM_CLOSE, Data("Notes"))
 
         )
 
@@ -94,7 +94,6 @@ class NotesActivity : AppCompatActivity() {
         }
 
         override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-            //если марс то работаем, если земля то нет
             if (viewHolder !is NotesRecyclerActivityAdapter.NoteViewHolder){
                 return super.onSelectedChanged(viewHolder, actionState)
             }

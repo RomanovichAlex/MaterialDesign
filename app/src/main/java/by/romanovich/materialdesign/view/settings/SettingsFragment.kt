@@ -1,6 +1,7 @@
 package by.romanovich.materialdesign.view.settings
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,9 @@ import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentSettingsBinding
+import by.romanovich.materialdesign.view.main.MainFragment
+import by.romanovich.materialdesign.view.notes.NotesActivity
+import by.romanovich.materialdesign.view.workToTextFragment.WorkToTextFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.tabs.TabLayout
 
@@ -39,6 +43,11 @@ class SettingsFragment : Fragment() {
 
         initChip()
         clickChip()
+
+        binding.workToTextButton.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,WorkToTextFragment.newInstance()).addToBackStack("").commit()
+        }
 
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             //у чип гроуп находим по позиции, которую выбрали
