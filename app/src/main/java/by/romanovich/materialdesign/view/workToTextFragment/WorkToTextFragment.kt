@@ -7,6 +7,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.BulletSpan
+import android.text.style.ImageSpan
 import android.util.Log
 import android.view.*
 import android.widget.Toast
@@ -135,9 +140,57 @@ class WorkToTextFragment : Fragment() {
                                         binding.textView.typeface = resources.getFont(R.font.azeret)
                                     }
 
-                                    val text = "My <h1> text </h1> <h2> text2 </h2> <ul><li>bullet one</li><li>bullet two</li></ul>"
+                                   /* val text = "My <h1> text </h1> <h2> text2 </h2> <ul><li>bullet one</li><li>bullet two</li></ul>"
                                     //FROM_HTML_MODE_COMPACT од на обработку трудных ситуаций универсальный
-                                    binding.textView.text = Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)
+                                    binding.textView.text = Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)*/
+
+
+                                    val spannableMutable = SpannableStringBuilder("My \n text \n text \nbullet one\nbullet two") // если текст изменяется spannable.штыуке()
+                                    //если текст неизменяется
+                                    val spannableUnMutable = SpannableString("My text \nbullet one\nbullet two")
+
+                                    if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.P) {
+                                        spannableMutable.setSpan(
+                                            BulletSpan(
+                                                20,
+                                                resources.getColor(R.color.colorAccent),
+                                                10
+                                            ),
+/* начало элемента списка */ 0, /* конец элемента списка */ 30,
+                                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                        )//вклячая оба
+                                        spannableMutable.setSpan(
+                                            BulletSpan(20, resources.getColor(R.color.colorAccent), 10),
+/* начало элемента списка */ 4, /* конец элемента списка */ 21, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                        )//вклячая оба
+
+                                        spannableMutable.setSpan(
+                                            BulletSpan(20, resources.getColor(R.color.colorAccent), 10),
+/* начало элемента списка */ 11, /* конец элемента списка */ 21, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                        )//вклячая оба
+                                    }
+
+                                        spannableMutable.setSpan(
+                                            BulletSpan(20, resources.getColor(R.color.colorAccent)),
+/* начало элемента списка */ 18, /* конец элемента списка */ spannableMutable.length,
+                                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                        )//вклячая оба
+                                    spannableMutable.setSpan(
+                                        BulletSpan(20, resources.getColor(R.color.colorAccent)),
+/* начало элемента списка */ 29, /* конец элемента списка */ spannableMutable.length,
+                                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                    )//вклячая оба
+
+
+                                    //проходим по всему тексту и проверяем == ли наша буква о
+                                    for (i in spannableMutable.indices){
+                                        if (spannableMutable[i]=='o'){
+                                            //и если ровна меняем ее на иконку
+                                            spannableMutable.setSpan(ImageSpan(requireContext(),R.drawable.ic_earth),i,i+1,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                                        }
+                                    }
+
+                                    binding.textView.text = spannableMutable
 
 
 
