@@ -6,14 +6,14 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.SpannableStringBuilder
+import android.text.*
 import android.text.style.BulletSpan
+import android.text.style.ForegroundColorSpan
 import android.text.style.ImageSpan
+import android.text.style.QuoteSpan
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -127,12 +127,28 @@ class WorkToTextFragment : Fragment() {
                                 is AppState.Loading -> {
                                 }
                                 is AppState.SuccessPOD -> {
-                                    binding.imageView.load(appState.serverResponse.url){
+                                    binding.imageView.load(appState.serverResponse.url) {
                                         placeholder(R.drawable.ic_no_photo_vector)
                                     }
-                                    binding.included.bottomSheetDescriptionHeader.text = appState.serverResponse.title
-                                    binding.included.bottomSheetDescription.text = appState.serverResponse.explanation
+                                    binding.included.bottomSheetDescriptionHeader.text =
+                                        appState.serverResponse.title
+                                    binding.included.bottomSheetDescription.text =
+                                        appState.serverResponse.explanation
 
+
+                                    /* val it = binding.textView.text
+                                    //ничего не позволяет делать со строкой
+                                    val spannableStart = SpannableString(it)
+                                    //NORMAL при SpannedString, SPANNABLE при SpannableString можно менять стили
+                                    binding.textView.setText(spannableStart, TextView.BufferType.SPANNABLE)
+
+                                    val spannable = binding.textView.text as SpannableString
+                                    spannable.setSpan(ForegroundColorSpan(ContextCompat.getColor(requireContext(),R.color.colorAccent)),
+                                        2,10,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)*/
+
+                                    //SpannableStringBilder .insert(позиция 20, текст для вставки "кпк")
+
+                                    /* 7 урок
                                     binding.textView.typeface = Typeface.createFromAsset(
                                         requireContext().assets, "font/Robus_BWqOd.otf")
 
@@ -145,22 +161,23 @@ class WorkToTextFragment : Fragment() {
                                     binding.textView.text = Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)*/
 
 
+
                                     val spannableMutable = SpannableStringBuilder("My \n text \n text \nbullet one\nbullet two") // если текст изменяется spannable.штыуке()
+
                                     //если текст неизменяется
                                     val spannableUnMutable = SpannableString("My text \nbullet one\nbullet two")
 
                                     if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.P) {
                                         spannableMutable.setSpan(
                                             BulletSpan(
-                                                20,
-                                                resources.getColor(R.color.colorAccent),
+                                                20, ContextCompat.getColor(requireContext(),R.color.colorAccent),
                                                 10
                                             ),
 /* начало элемента списка */ 0, /* конец элемента списка */ 30,
                                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                                         )//вклячая оба
                                         spannableMutable.setSpan(
-                                            BulletSpan(20, resources.getColor(R.color.colorAccent), 10),
+                                            BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.colorAccent), 10),
 /* начало элемента списка */ 4, /* конец элемента списка */ 21, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                                         )//вклячая оба
 
@@ -195,12 +212,72 @@ class WorkToTextFragment : Fragment() {
 
 
                                     //binding.textView.typeface = Typeface.createFromAsset(requireContext().assets, "font/Robus_BWqOd.otf")
-                                    // или "fonts/Niceyear.ttf", если шрифты в папке assets/fonts
+                                    // или "fonts/Niceyear.ttf", если шрифты в папке assets/fonts*/
 
+                                    val it = binding.textView.text
+                                    //ничего не позволяет делать со строкой
+                                    val spannableStart = SpannableStringBuilder(it)
+                                    //NORMAL при SpannedString, SPANNABLE при SpannableString можно менять стили
+                                    binding.textView.setText(
+                                        spannableStart,
+                                        TextView.BufferType.EDITABLE)
+
+                                    val spannable = binding.textView.text as SpannableStringBuilder
+                                    initSpan(spannable)
                                 }
+
                             }
                         }
-                        override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+    private fun initSpan(spannable: SpannableStringBuilder) {
+        spannable.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorAccent
+                )
+            ),
+            2, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannable.insert(5, "jhj")
+        spannable.insert(10, "\n")
+        spannable.insert(20, "\n")
+
+
+        val q: QuoteSpan
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            q = QuoteSpan(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorAccent,
+                ), 10, 20
+            )
+
+        } else {
+            q = QuoteSpan(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorAccent,
+                )
+            )
+        }
+        spannable.setSpan(
+            q,
+            1, 20, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        val qq = QuoteSpan(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.colorAccent,
+            )
+        )
+        spannable.setSpan(
+            qq,
+            10, 20, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
                             super.onCreateOptionsMenu(menu, inflater)
                             inflater.inflate(R.menu.menu_bottom_bar, menu)
                         }
