@@ -6,6 +6,7 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.*
 import android.widget.Toast
@@ -133,6 +134,11 @@ class WorkToTextFragment : Fragment() {
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                         binding.textView.typeface = resources.getFont(R.font.azeret)
                                     }
+
+                                    val text = "My <h1> text </h1> <h2> text2 </h2> <ul><li>bullet one</li><li>bullet two</li></ul>"
+                                    //FROM_HTML_MODE_COMPACT од на обработку трудных ситуаций универсальный
+                                    binding.textView.text = Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)
+
 
 
                                     //binding.textView.typeface = Typeface.createFromAsset(requireContext().assets, "font/Robus_BWqOd.otf")
