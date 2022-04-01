@@ -87,13 +87,13 @@ class SettingsFragment : Fragment() {
 
     private fun initChip() {
         when(requireActivity().getPreferences(Activity.MODE_PRIVATE).getString("settingTheme","")){
-            "chipDay"->{
+            "chipDark"->{
                 binding.chipDark.isChecked = true
             }
-            "chipMars"->{
+            "chipMens"->{
                 binding.chipMens.isChecked = true
             }
-            "chipMoon"->{
+            "chipGirls"->{
                 binding.chipGirls.isChecked = true
             }
         }
@@ -103,17 +103,17 @@ class SettingsFragment : Fragment() {
         binding.chipGroup1.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.chipDark->{
-                    requireActivity().getPreferences(Activity.MODE_PRIVATE).edit().putString("settingTheme","chipDay").apply()
+                    requireActivity().getPreferences(Activity.MODE_PRIVATE).edit().putString("settingTheme","chipDark").apply()
                     requireActivity().setTheme(R.style.MyDarkTheme)
                     recreate(requireActivity())
                 }
                 R.id.chipMens->{
-                    requireActivity().getPreferences(Activity.MODE_PRIVATE).edit().putString("settingTheme","chipMars").apply()
+                    requireActivity().getPreferences(Activity.MODE_PRIVATE).edit().putString("settingTheme","chipMens").apply()
                     requireActivity().setTheme(R.style.MensTheme)
                     recreate(requireActivity())
                 }
                 R.id.chipGirls->{
-                    requireActivity().getPreferences(Activity.MODE_PRIVATE).edit().putString("settingTheme","chipMoon").apply()
+                    requireActivity().getPreferences(Activity.MODE_PRIVATE).edit().putString("settingTheme","chipGirls").apply()
                     requireActivity().setTheme(R.style.GirlsTheme)
                     recreate(requireActivity())
                 }

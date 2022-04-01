@@ -229,19 +229,27 @@ class WorkToTextFragment : Fragment() {
 
 
                                     //факультатив
+                                    //получили указатель на
+                                    val handler = Handler(Looper.getMainLooper())
                                     val requestCollback = FontRequest("com.google.android.gms.fonts", "com.google.android.gms","Aguafina Script", R.array.com_google_android_gms_fonts_certs)
                                     val callback = object : FontsContractCompat.FontRequestCallback(){
                                         override fun onTypefaceRetrieved(typeface: Typeface?) {
                                           typeface?.let{
+                                              handler.post{
                                               if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                                                  spannable.setSpan(TypefaceSpan(it),
-                                                  0,50,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                                                  spannable.setSpan(
+                                                      TypefaceSpan(it),
+                                                      0, 50, Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                                                  )
                                                   //spannable.insert(0,"1")
+                                              }
                                               }
                                           }
                                         }
                                     }
-                                    val handler = Handler(Looper.getMainLooper())
+
+
+                                    //получаем шрифт в вспомогательном потоке, и возращаем благодаря хэндлеру в главный
                                     FontsContractCompat.requestFont(requireContext(),requestCollback,callback,handler)
                                 }
 

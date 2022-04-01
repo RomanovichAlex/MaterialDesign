@@ -11,9 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentHomeBinding
@@ -22,13 +22,15 @@ import by.romanovich.materialdesign.viewmodel.PictureOfTheDayViewModel
 import coil.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class HomeFragment : Fragment() {
 
-    var flag = false
 
     lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     //зануление банинга из за утечек памяти в он дестрой, чтоб в фоне не висел
@@ -58,14 +60,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bottomSheetBehavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
         //верни дату вешаем лисенир
-        viewModel.getData().observe(viewLifecycleOwner, Observer {
-            renderData(it)
-        })
+        viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
         viewModel.sendRequest(takeDate(0))
-
         tabLayoutInit()
-
-
 
 
         //по клику на википедию открываем википедию, по введенному тексту
@@ -74,6 +71,7 @@ class HomeFragment : Fragment() {
                 data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
+
         /*старый боттом шит
         //получаем боттом... из контейнера ...
 
@@ -126,6 +124,21 @@ class HomeFragment : Fragment() {
             isMain = !isMain
         }*/
     }
+
+
+    private fun showNasaVideo(videoId:String){
+        lifecycle.addObserver(binding.youTubePlayerView)
+        binding.youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                youTubePlayer.loadVideo(videoId, 0f)
+            }
+        })
+    }
+
+
+
+
+
 
 
     private fun tabLayoutInit() {
@@ -187,18 +200,41 @@ class HomeFragment : Fragment() {
         private fun renderData(appState: AppState) {
             when (appState) {
                 is AppState.Error -> {
-                    loadingFailed(appState.error,appState.code)
+                    loadingFailed(appState.error, appState.code)
                 }
                 is AppState.Loading -> {
-
+                    binding.youTubePlayerView.visibility = View.GONE
+                    binding.included.root.visibility = View.GONE
                 }
                 is AppState.SuccessPOD -> {
-                    //в наш байнинг загружаем урл
-                    binding.imageView.load(appState.serverResponse.url){
-                        placeholder(R.drawable.ic_no_photo_vector)
+                    with(binding) {
+
+
+
+                        if (appState.serverResponse.mediaType == "image") {
+                            //в наш байнинг загружаем урл
+                            imageView.load(appState.serverResponse.url) {
+                                placeholder(R.drawable.ic_no_photo_vector)
+                                included.root.visibility = View.VISIBLE
+                            }
+                            included.bottomSheetDescriptionHeader.text =
+                                appState.serverResponse.title
+                            included.bottomSheetDescription.text =
+                                appState.serverResponse.explanation
+                        } else {
+                            imageView.load(0) {
+                                placeholder(R.drawable.ic_no_photo_vector)
+                                imageView.visibility = View.GONE
+                                youTubePlayerView.visibility = View.VISIBLE
+                                showNasaVideo(
+                                    appState.serverResponse.url.replace(
+                                        "https://www.youtube.com/ember/",
+                                        ""
+                                    ).replace("?rel=0", "")
+                                )
+                            }
+                        }
                     }
-                    binding.included.bottomSheetDescriptionHeader.text = appState.serverResponse.title
-                    binding.included.bottomSheetDescription.text = appState.serverResponse.explanation
                 }
             }
         }
@@ -241,3 +277,5 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+
+
