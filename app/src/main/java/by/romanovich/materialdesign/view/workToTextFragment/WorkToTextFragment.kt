@@ -2,23 +2,25 @@ package by.romanovich.materialdesign.view.workToTextFragment
 
 import android.content.Intent
 import android.graphics.Typeface
-
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.*
-import android.text.style.*
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.text.style.QuoteSpan
+import android.text.style.TypefaceSpan
 import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.provider.FontRequest
 import androidx.core.provider.FontsContractCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.R

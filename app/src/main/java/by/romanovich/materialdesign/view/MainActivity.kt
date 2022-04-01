@@ -13,13 +13,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         when(getPreferences(Activity.MODE_PRIVATE).getString("settingTheme","")){
-            "chipDay"->{
+            "chipDark"->{
                 setTheme(R.style.MyDarkTheme)
             }
-            "chipMars"->{
+            "chipMens"->{
                 setTheme(R.style.MensTheme)
             }
-            "chipMoon"->{
+            "chipGirls"->{
                 setTheme(R.style.GirlsTheme)
             }
         }

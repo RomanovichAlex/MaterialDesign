@@ -4,15 +4,20 @@ package by.romanovich.materialdesign.view.home
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.annotation.NonNull
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.R
@@ -24,7 +29,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -58,7 +62,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         bottomSheetBehavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
+
+
         //верни дату вешаем лисенир
         viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
         viewModel.sendRequest(takeDate(0))
@@ -197,6 +204,7 @@ class HomeFragment : Fragment() {
 
 
         //обработка лисенера
+
         private fun renderData(appState: AppState) {
             when (appState) {
                 is AppState.Error -> {
@@ -209,8 +217,6 @@ class HomeFragment : Fragment() {
                 is AppState.SuccessPOD -> {
                     with(binding) {
 
-
-
                         if (appState.serverResponse.mediaType == "image") {
                             //в наш байнинг загружаем урл
                             imageView.load(appState.serverResponse.url) {
@@ -221,6 +227,16 @@ class HomeFragment : Fragment() {
                                 appState.serverResponse.title
                             included.bottomSheetDescription.text =
                                 appState.serverResponse.explanation
+
+                            included.bottomSheetDescriptionHeader.apply{
+                                refactorBottomSheetTitle(appState)
+                            }
+                            appState.serverResponse.explanation?. let {
+                                included.bottomSheetDescription.text = it
+                                included.bottomSheetDescription.typeface= Typeface.createFromAsset(
+                                    requireContext().assets, "font/Robus_BWqOd.otf")
+
+                            }
                         } else {
                             imageView.load(0) {
                                 placeholder(R.drawable.ic_no_photo_vector)
@@ -238,6 +254,48 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+    private fun TextView.refactorBottomSheetTitle(appState: AppState.SuccessPOD) {
+        val spannableString = SpannableString(appState.serverResponse.title)
+        spannableString.setSpan(UnderlineSpan(), 0, appState.serverResponse.title.length, 0)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            spannableString.setSpan(
+                BulletSpan(
+                    20,
+                    ContextCompat.getColor(requireContext(), R.color.red), 10
+                ), 0, appState.serverResponse.title.length, 0
+            )
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            spannableString.setSpan(
+                LineBackgroundSpan.Standard(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.purple_200
+                    )
+                ), 0, appState.serverResponse.title.length, 0
+            )
+        }
+        for (i in spannableString.indices) {
+            // Or DynamicDrawableSpan.ALIGN_BOTTOM; Or DynamicDrawableSpan.ALIGN_CENTER
+            val verticalAlignment = DynamicDrawableSpan.ALIGN_BASELINE
+            // Constructed by Drawable
+            val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_earth) !!
+            val widthInPx = 45
+            val heightInPx = 45
+            drawable.setBounds(0, 0, widthInPx, heightInPx) // Set intrinics bounds!!!
+
+            if (spannableString[i] == 'o') {
+                //и если ровна меняем ее на иконку
+                spannableString.setSpan(
+                    ImageSpan(drawable, verticalAlignment), i, i + 1,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+        }
+
+        text = spannableString
+    }
 
     private fun loadingFailed(textId: Int, code: Int) {
         val dialog: AlertDialog.Builder = AlertDialog.Builder(requireContext())
