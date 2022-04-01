@@ -6,11 +6,10 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.*
-import android.text.style.BulletSpan
-import android.text.style.ForegroundColorSpan
-import android.text.style.ImageSpan
-import android.text.style.QuoteSpan
+import android.text.style.*
 import android.util.Log
 import android.view.*
 import android.widget.TextView
@@ -18,6 +17,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.provider.FontRequest
+import androidx.core.provider.FontsContractCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.R
@@ -224,6 +225,24 @@ class WorkToTextFragment : Fragment() {
 
                                     val spannable = binding.textView.text as SpannableStringBuilder
                                     initSpan(spannable)
+
+
+
+                                    //факультатив
+                                    val requestCollback = FontRequest("com.google.android.gms.fonts", "com.google.android.gms","Aguafina Script", R.array.com_google_android_gms_fonts_certs)
+                                    val callback = object : FontsContractCompat.FontRequestCallback(){
+                                        override fun onTypefaceRetrieved(typeface: Typeface?) {
+                                          typeface?.let{
+                                              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                                  spannable.setSpan(TypefaceSpan(it),
+                                                  0,50,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                                                  //spannable.insert(0,"1")
+                                              }
+                                          }
+                                        }
+                                    }
+                                    val handler = Handler(Looper.getMainLooper())
+                                    FontsContractCompat.requestFont(requireContext(),requestCollback,callback,handler)
                                 }
 
                             }
