@@ -31,7 +31,7 @@
         <item name="toolbarStyle">@style/myToolbar</item>
     </style>
 
-    <style name="GirlsTheme" parent="MyBaseTheme">4
+    <style name="GirlsTheme" parent="MyBaseTheme">
 
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
@@ -41,6 +41,19 @@
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyleGirls</item>
         <item name="textAppearanceHeadline1">@style/MyTextAppearanceHeadline1</item>
         <item name="toolbarStyle">@style/myToolbar</item>
+    </style>
+
+    <style name="GirlsThemeSplash" parent="MyBaseTheme">
+
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="superColor">@color/hotPink</item>
+        <item name="iconColor">@color/hotPink</item>
+        <item name="textInputColor">@color/white</item>
+        <item name="bottomAppBarStyle">@style/myBottomAppBarStyleGirls</item>
+        <item name="textAppearanceHeadline1">@style/MyTextAppearanceHeadline1</item>
+        <item name="toolbarStyle">@style/myToolbar</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
     <style name="MyBaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">

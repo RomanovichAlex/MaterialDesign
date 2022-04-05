@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setTheme(R.style.MensTheme)
+
         when(getPreferences(Activity.MODE_PRIVATE).getString("settingTheme","")){
             "chipDark"->{
                 setTheme(R.style.MyDarkTheme)
@@ -23,7 +25,6 @@ class MainActivity : AppCompatActivity() {
                 setTheme(R.style.GirlsTheme)
             }
         }
-
 
         setContentView(R.layout.activity_main)
 
