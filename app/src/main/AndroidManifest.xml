@@ -10,39 +10,34 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/GirlsThemeSplash">
-
+        android:theme="@style/GirlsTheme">
         <activity
-            android:name=".view.notes.NotesActivity"
+            android:name=".view.UX.UXActivity"
             android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
     </activity>
 
         <activity
+            android:name=".view.notes.NotesActivity"
+            android:exported="true"></activity>
+        <activity
             android:name=".view.recycler.RecyclerActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".view.animations.AnimationsActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".view.MainActivity"
-            android:exported="true">
-
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".view.SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-
         <activity
             android:name=".view.viewpager.ApiActivity"
             android:exported="true" />
