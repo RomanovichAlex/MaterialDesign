@@ -10,6 +10,7 @@ class UXActivity : AppCompatActivity() {
     lateinit var binding: ActivityUxBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.MensTheme)
         binding = ActivityUxBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -17,6 +18,10 @@ class UXActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.fragment_ux_text->{
                     navigateTo(TextFragment())
+                    true
+                }
+                R.id.fragment_ux_button->{
+                    navigateTo(ButtonFragment())
                     true
                 }
                 else -> true

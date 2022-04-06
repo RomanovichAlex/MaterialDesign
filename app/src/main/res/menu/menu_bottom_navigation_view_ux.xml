@@ -5,4 +5,10 @@
         android:icon="@drawable/ic_earth"
         android:title="ux_text" />
 
+    <item
+        android:id="@+id/fragment_ux_button"
+        android:icon="@drawable/ic_earth"
+        android:title="ux_text" />
+
+
 </menu>

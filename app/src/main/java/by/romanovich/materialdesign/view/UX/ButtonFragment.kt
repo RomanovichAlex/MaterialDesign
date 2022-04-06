@@ -9,13 +9,14 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
 import by.romanovich.materialdesign.R
+import by.romanovich.materialdesign.databinding.FragmentUxButtonBinding
 import by.romanovich.materialdesign.databinding.FragmentUxTextBinding
 
 
-class TextFragment : Fragment() {
+class ButtonFragment : Fragment() {
 
-    private var _binding: FragmentUxTextBinding? = null
-    val binding: FragmentUxTextBinding
+    private var _binding: FragmentUxButtonBinding? = null
+    val binding: FragmentUxButtonBinding
         get() = _binding!!
 
 
@@ -23,7 +24,7 @@ class TextFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUxTextBinding.inflate(inflater, container, false)
+        _binding = FragmentUxButtonBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,6 +36,6 @@ class TextFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = TextFragment()
+        fun newInstance() = ButtonFragment()
     }
 }
