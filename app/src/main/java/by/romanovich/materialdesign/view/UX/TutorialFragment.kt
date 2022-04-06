@@ -17,20 +17,8 @@ import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 import smartdevelop.ir.eram.showcaseviewlib.config.Gravity
 
 
-class TutorialFragment : Fragment() {
+class TutorialFragment : ViewBindingFragment<FragmentTutorialBinding>(FragmentTutorialBinding::inflate){
 
-    private var _binding: FragmentTutorialBinding? = null
-    val binding: FragmentTutorialBinding
-        get() = _binding !!
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentTutorialBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,13 +52,7 @@ class TutorialFragment : Fragment() {
                 .setTargetView(binding.layoutGood)
             builder.build().show()
         }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
+    
 
     companion object {
         @JvmStatic

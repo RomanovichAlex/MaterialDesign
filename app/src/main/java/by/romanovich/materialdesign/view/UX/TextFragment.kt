@@ -9,29 +9,11 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
 import by.romanovich.materialdesign.R
+import by.romanovich.materialdesign.databinding.FragmentUxButtonBinding
 import by.romanovich.materialdesign.databinding.FragmentUxTextBinding
 
 
-class TextFragment : Fragment() {
-
-    private var _binding: FragmentUxTextBinding? = null
-    val binding: FragmentUxTextBinding
-        get() = _binding!!
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentUxTextBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
+class TextFragment: ViewBindingFragment<FragmentUxTextBinding>(FragmentUxTextBinding::inflate) {
 
     companion object {
         @JvmStatic
