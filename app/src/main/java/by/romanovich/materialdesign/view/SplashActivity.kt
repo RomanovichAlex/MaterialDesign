@@ -1,6 +1,5 @@
 package by.romanovich.materialdesign.view
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -9,7 +8,6 @@ import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import by.romanovich.materialdesign.R
-import by.romanovich.materialdesign.view.main.MainFragment
 
 
 class SplashActivity : AppCompatActivity() {

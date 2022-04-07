@@ -1,33 +1,14 @@
 package by.romanovich.materialdesign.view.main
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentMainBinding
+import by.romanovich.materialdesign.view.UX.ViewBindingFragment
 import by.romanovich.materialdesign.view.viewpager.MainViewPagerAdapter
 
 
-class MainFragment : Fragment() {
-
-
-    //зануление банинга из за утечек памяти в он дестрой, чтоб в фоне не висел
-    private var _binding: FragmentMainBinding? = null
-    val binding: FragmentMainBinding
-    get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        _binding = FragmentMainBinding.inflate(inflater, container,false)
-       return binding.root
-
-    }
-
+class MainFragment : ViewBindingFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,10 +63,5 @@ class MainFragment : Fragment() {
         companion object {
             @JvmStatic
             fun newInstance() = MainFragment()
-        }
-
-        override fun onDestroy() {
-            super.onDestroy()
-            _binding = null
         }
     }

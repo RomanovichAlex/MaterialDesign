@@ -5,31 +5,22 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentAsteroidBinding
 import by.romanovich.materialdesign.repository.asteroid.NearEarthObject
+import by.romanovich.materialdesign.view.UX.ViewBindingFragment
 import by.romanovich.materialdesign.viewmodel.AppState
-
 import by.romanovich.materialdesign.viewmodel.AsteroidViewModel
 
 
-class AsteroidFragment : Fragment() {
-    private var _binding: FragmentAsteroidBinding? = null
-    private val binding: FragmentAsteroidBinding get() = _binding!!
+class AsteroidFragment : ViewBindingFragment<FragmentAsteroidBinding>(FragmentAsteroidBinding::inflate) {
+
     private val viewModel: AsteroidViewModel by lazy { ViewModelProvider(this).get(AsteroidViewModel::class.java) }
     private val adapter:AsteroidRecyclerViewAdapter by lazy { AsteroidRecyclerViewAdapter() }
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentAsteroidBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -86,10 +77,5 @@ class AsteroidFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = AsteroidFragment()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

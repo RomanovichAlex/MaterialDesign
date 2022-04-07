@@ -6,15 +6,13 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.romanovich.materialdesign.BuildConfig
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentPhotoEarthBinding
+import by.romanovich.materialdesign.view.UX.ViewBindingFragment
 import by.romanovich.materialdesign.view.notes.NotesActivity
 import by.romanovich.materialdesign.viewmodel.AppState
 import by.romanovich.materialdesign.viewmodel.PhotoEarthViewModel
@@ -22,28 +20,12 @@ import coil.load
 import com.google.android.material.snackbar.Snackbar
 
 
-class PhotoEarthFragment : Fragment() {
-    private var _binding: FragmentPhotoEarthBinding? = null
-    private val binding: FragmentPhotoEarthBinding get() {
-        return _binding!!
-    }
+class PhotoEarthFragment : ViewBindingFragment<FragmentPhotoEarthBinding>(FragmentPhotoEarthBinding::inflate) {
 
     private var flag = false
     private var duration = 1000L
 
     private val viewModel: PhotoEarthViewModel by lazy { ViewModelProvider(this).get(PhotoEarthViewModel::class.java) }
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentPhotoEarthBinding.inflate(inflater,container,false)
-        return binding.root
-
-
-}
 
 
 
@@ -222,9 +204,5 @@ class PhotoEarthFragment : Fragment() {
         fun newInstance(): PhotoEarthFragment {
             return PhotoEarthFragment()
         }
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

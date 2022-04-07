@@ -1,7 +1,7 @@
 package by.romanovich.materialdesign.view.UX
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.ActivityUxBinding

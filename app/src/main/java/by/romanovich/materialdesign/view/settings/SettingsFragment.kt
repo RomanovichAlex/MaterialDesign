@@ -2,36 +2,17 @@ package by.romanovich.materialdesign.view.settings
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat.recreate
-import androidx.fragment.app.Fragment
 import by.romanovich.materialdesign.R
 import by.romanovich.materialdesign.databinding.FragmentSettingsBinding
+import by.romanovich.materialdesign.view.UX.ViewBindingFragment
 import by.romanovich.materialdesign.view.workToTextFragment.WorkToTextFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.tabs.TabLayout
 
-class SettingsFragment : Fragment() {
-
-
-    private var _binding: FragmentSettingsBinding? = null
-    val binding: FragmentSettingsBinding
-        get() = _binding!!
-
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-
+class SettingsFragment : ViewBindingFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -123,10 +104,5 @@ class SettingsFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = SettingsFragment()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }
